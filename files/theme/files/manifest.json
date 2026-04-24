@@ -1,0 +1,464 @@
+{
+  "responsive": true,
+  "tmpSocialIconFont": true,
+  "features": ["responsive", "color-palettes"],
+  "color-support": {
+    "primary": "#0083dd"
+  },
+  "color-presets": [
+    {
+      "variation": "blue",
+      "primary": "#0083dd",
+      "is-dark": false
+    },
+    {
+      "variation": "yellow",
+      "primary": "#feb813",
+      "is-dark": false
+    },
+    {
+      "variation": "red",
+      "primary": "#ca261b",
+      "is-dark": false
+    },
+    {
+      "variation": "pink",
+      "primary": "#e33783",
+      "is-dark": false
+    },
+    {
+      "variation": "green",
+      "primary": "#67d22a",
+      "is-dark": false
+    },
+    {
+      "variation": "orange",
+      "primary": "#f9690e",
+      "is-dark": false
+    }
+  ],
+  "custom-options": [
+    {
+      "name": "header-title",
+      "title": "Header Title",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "phone-number",
+      "title": "Phone Number",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "location",
+      "title": "Location",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "time-open",
+      "title": "Time Open Close",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "top-header-sticky",
+      "title": "Top Header",
+      "type": "toggle",
+      "default": true,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "sticky-nav",
+      "title": "Sticky Navigation",
+      "type": "toggle",
+      "default": true,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "custom-option",
+      "title": "Custom Color Options",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "BgColor",
+      "title": "BG",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "TopHeader",
+      "title": "Top Header BG",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "menu",
+      "title": "Menu Styles",
+      "type": "dropdown",
+      "default": "style-1",
+      "is-body-class": true,
+      "is-less-var": false,
+      "choices": [
+        {
+          "value": "style-1",
+          "title": "Style 1"
+        },
+        {
+          "value": "style-2",
+          "title": "Style 2"
+        },
+        {
+          "value": "style-3",
+          "title": "Style 3"
+        },
+        {
+          "value": "style-4",
+          "title": "Style 4"
+        },
+        {
+          "value": "style-5",
+          "title": "Style 5"
+        }
+      ]
+		},
+		{
+      "name": "MenuStickyBG",
+      "title": "Menu Sticky BG",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "sticky-button",
+      "title": "Header Button",
+      "type": "toggle",
+      "default": true,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "NavButtonColor",
+      "title": "Header Button",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "NavButtonHoverColor",
+      "title": "H B Hover Text",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "NavColor",
+      "title": "Nav BG",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "SocialColor",
+      "title": "Social",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "SearchColor",
+      "title": "Search",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "SearchHoverColor",
+      "title": "Search Hover",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "CartColor",
+      "title": "Cart",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "CartHoverColor",
+      "title": "Cart Hover",
+      "type": "color",
+      "default": "#999999",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "MenuColor",
+      "title": "Nav Text",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "MenuHoverColor",
+      "title": "Nav Active",
+      "type": "color",
+      "default": "#0083dd",
+      "is-body-class": false,
+      "is-less-var": true
+		},
+    {
+      "name": "DropDownBG",
+      "title": "Drop Down BG",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "DropDownColor",
+      "title": "Dd Text Color",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "DropDownColorActive",
+      "title": "Dd Active Color",
+      "type": "color",
+      "default": "#0083dd",
+      "is-body-class": false,
+      "is-less-var": true
+		},
+		{
+      "name": "MobileMenuTextColor",
+      "title": "Mobile Text Nav",
+      "type": "color",
+      "default": "#111",
+      "is-body-class": false,
+      "is-less-var": true
+		},
+    {
+      "name": "MobileMenuTextHoverColor",
+      "title": "Mobile Text Nav Active",
+      "type": "color",
+      "default": "#0083dd",
+      "is-body-class": false,
+      "is-less-var": true
+		},
+    {
+      "name": "MobileMenuBackgroundColor",
+      "title": "Mobile Menu BG",
+      "type": "color",
+      "default": "#fff",
+      "is-body-class": false,
+      "is-less-var": true
+		},
+    {
+      "name": "MobileDropdownBackgroundColor",
+      "title": "Mobile Dropdown BG",
+      "type": "color",
+      "default": "#fff",
+      "is-body-class": false,
+      "is-less-var": true
+		},
+    {
+      "name": "ButtonHeaderColor",
+      "title": "Banner Button",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "Button1",
+      "title": "Button 1",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "Button1HoverColor",
+      "title": "B 1 Hover Color",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "Button2",
+      "title": "Button 2",
+      "type": "color",
+      "default": "#0083dd",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "Button2HoverColor",
+      "title": "B 2 Hover Color",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "CaptionBg",
+      "title": "Caption Slider",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "BdFooter",
+      "title": "Footer Border",
+      "type": "color",
+      "default": "#0083dd",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "BgFooter",
+      "title": "Footer BG",
+      "type": "color",
+      "default": "#111111",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "ToTop",
+      "title": "Go To Top",
+      "type": "toggle",
+      "default": true,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "ToTopColor",
+      "title": "Go To Top",
+      "type": "color",
+      "default": "#333333",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "ToTopTextColor",
+      "title": "Go To Top Text",
+      "type": "color",
+      "default": "#ffffff",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "ToTopColorHover",
+      "title": "Go To Top Hover",
+      "type": "color",
+      "default": "#0083dd",
+      "is-body-class": false,
+      "is-less-var": true
+    },
+    {
+      "name": "section-6",
+      "title": "Section 6",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "section-7",
+      "title": "Section 7",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "section-26",
+      "title": "Section 6 (Page 2)",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "section-27",
+      "title": "Section 7 (Page 2)",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+      "name": "section-36",
+      "title": "Section 6 (Scrolli Page)",
+      "type": "toggle",
+      "default": false,
+      "is-body-class": true,
+      "is-less-var": false
+    },
+    {
+		"name": "section-37",
+		"title": "Section 7 (Scrolli Page)",
+		"type": "toggle",
+		"default": false,
+		"is-body-class": true,
+		"is-less-var": false
+    },
+    {
+		"name": "slide-24",
+		"title": "4 Slide",
+		"type": "toggle",
+		"default": false,
+		"is-body-class": true,
+		"is-less-var": false
+    },
+    {
+		"name": "slide-25",
+		"title": "5 Slide",
+		"type": "toggle",
+		"default": false,
+		"is-body-class": true,
+		"is-less-var": false
+    },
+	{
+		"name": "TopBarIconColor",
+		"title": "Top Bar Icon Color",
+		"type": "color",
+		"default": "#fff",
+		"is-body-class": false,
+		"is-less-var": true
+	},
+  ]
+}

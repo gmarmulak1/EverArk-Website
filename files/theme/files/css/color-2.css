@@ -1,0 +1,90 @@
+.wsite-nav-cart a span,
+#wsite-com-category-product-group-pagelist a:hover, 
+#wsite-com-category-product-group-pagelist a.wsite-selected,
+body.menu-style-2 .menu > ul > li > a:after,
+body.menu-style-3 .menu > ul > li > a:after,
+body.menu-style-4 .menu > ul > li > a:after,
+.btn-info.btn-com:hover {
+	background: #feb813 !important;
+} 
+.wsite-com-checkout-item-image .wsite-imageaspectratio-image-container:after {
+    -moz-box-shadow: 0 0 0 2px #feb813 inset;
+    -webkit-box-shadow: 0 0 0 2px #feb813 inset;
+    box-shadow: 0 0 0 2px #feb813 inset;
+}
+#wsite-com-product-add-to-cart,
+.boo-option-style li:hover img,
+body.menu-style-1 .menu-style-1 img,
+body.menu-style-2 .menu-style-2 img,
+body.menu-style-3 .menu-style-3 img,
+body.menu-style-4 .menu-style-4 img,
+body.menu-style-5 .menu-style-5 img,
+body.dropdown-menu-1 .dropdown-menu-1 img,
+body.dropdown-menu-2 .dropdown-menu-2 img,
+#wsite-mini-cart.arrow-top, 
+#wsite-mini-cart.arrow-left,
+input[type="text"]:focus,
+input[type="password"]:focus, 
+.wsite-form-inputtextarea:focus,
+textarea.wsite-form-input:focus,
+#commentPostDiv .field textarea:focus,
+input[type=radio]:checked + label:before, 
+.wsite-com-product-option-label input[type=radio]:checked + span:before,
+input[type=checkbox]:checked + label:before, 
+.wsite-search-facet-entries label input[type=checkbox]:checked + a:before,
+#banner .wsite-button.wsite-button-highlight,
+.wsite-button-highlight,
+.wsite-page-memberpage .wsite-membership-box .membership-right-action,
+#footer-wrap,
+body.custom-option-on #footer-wrap,
+body.custom-option-on .boo-darkcolor .wsite-button-highlight, 
+body.custom-option-on .wsite-button-highlight {
+	border-color: #feb813 !important;
+}
+ 
+body.custom-option-on .boo-darkcolor .wsite-button-highlight:before, 
+body.custom-option-on .wsite-button-highlight:before,
+input[type=radio]:checked + label:after, 
+.wsite-com-product-option-label input[type=radio]:checked + span:after,
+#banner .wsite-button.wsite-button-highlight:before,
+.wsite-button-highlight:before,
+#toTop:before,
+body.custom-option-on #toTop:before,
+.wsite-menu-wrap > ul > li a:before,
+.btn-info.btn-com:hover, .menu-dots a:before,
+.menu-dots a:before, .menu-dots .boo-tooltip {
+    background: #feb813 !important;
+}
+.menu .active > a,
+#active > a, 
+.menu li:hover > a,
+.wsite-nav-current > a,
+body.custom-option-on .menu .active > a,
+body.custom-option-on #active > a,
+body.custom-option-on .menu li:hover > a,
+body.custom-option-on .wsite-nav-current > a,
+.menu-2 li:after,
+.wsite-menu-wrap li:hover > a, 
+.wsite-menu-wrap li.wsite-nav-current,
+body.custom-option-on .wsite-menu-wrap li:hover > a, 
+body.custom-option-on .wsite-menu-wrap li.wsite-nav-current,
+#banner .wsite-button.wsite-button-highlight, .wsite-button-highlight,
+.boo-option-items a:hover i, 
+.boo-option-items a:focus i,
+#wsite-com-product-add-to-cart span,
+#banner .wsite-button.wsite-button-highlight span,
+.mobile-nav .wsite-nav-current > a,
+.mobile-nav a:hover,
+#wsite-com-product-social-sharing a:hover,
+#wsite-com-product-add-to-cart,
+#wsite-mini-cart .wsite-subtotal-wrapper,
+input[type=checkbox]:checked + label:after, 
+.wsite-search-facet-entries label input[type=checkbox]:checked + a:after, 
+[class*=rss-box-] .rss-title a:hover,
+[class*=rss-box-] .rss-item a:hover,
+.wsite-page-memberpage .wsite-membership-box .membership-right-action,
+body.custom-option-on .boo-darkcolor .wsite-button-highlight, 
+body.custom-option-on .wsite-button-highlight {
+	color: #feb813 !important; 
+}
+  
