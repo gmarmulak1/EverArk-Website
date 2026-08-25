@@ -34,7 +34,10 @@ const VENDOR_HOSTS = new Set([
   'fonts.gstatic.com',
 ]);
 
-const absolutise = (u) => (u.startsWith('//') ? `https:${u}` : u.replace(/^http:\/\//, 'https://'));
+const absolutise = (u) => {
+  const withScheme = u.startsWith('//') ? `https:${u}` : u.replace(/^http:\/\//, 'https://');
+  return withScheme.trim().replace(/ /g, '%20');
+};
 
 /** Map a remote URL to its mirrored path inside the repo. */
 function localPathFor(rawUrl) {
@@ -60,7 +63,9 @@ function enqueue(rawUrl) {
 }
 
 // ---------------------------------------------------------------- discovery
-const URL_IN_ATTR = /(?:src|href)\s*=\s*["']((?:https?:)?\/\/[^"'\s]+)["']/g;
+// One Google Fonts link in the export has an unencoded space in its query
+// ("family=Open Sans"), so the URL cannot stop at whitespace like the others.
+const URL_IN_ATTR = /(?:src|href)\s*=\s*["']((?:https?:)?\/\/[^"']+)["']/g;
 const URL_IN_CSS = /url\(\s*["']?((?:https?:)?\/\/[^)"'\s]+)["']?\s*\)/g;
 const IMPORT_IN_CSS = /@import\s+url\(\s*["']?((?:https?:)?\/\/[^)"'\s]+)["']?\s*\)/g;
 
@@ -116,6 +121,10 @@ while (wave.length) {
     // Relative url() inside a mirrored stylesheet resolves by directory shape,
     // but the file still has to exist locally — pull those too.
     for (const m of css.matchAll(/url\(\s*["']?(?!data:|https?:|\/\/)([^)"'\s]+)["']?\s*\)/g)) {
+      const target = m[1].split(/[?#]/)[0];
+      // On a re-run the stylesheet has already been rewritten to point at a
+      // sibling directory; that reference resolves on disk, not upstream.
+      if (fs.existsSync(path.resolve(path.dirname(path.join(ROOT, local)), target))) continue;
       const childRemote = new URL(m[1].split('#')[0], remote).toString();
       const childLocal = localPathFor(childRemote);
       if (childLocal && !queue.has(childLocal)) {

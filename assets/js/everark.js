@@ -1,67 +1,25 @@
 /**
  * EverArk site runtime.
  *
- * Replaces the parts of Weebly's 481 KB main.js that this site actually used.
- * The rest of that bundle - the store, membership, the editor bridge, the
- * JSON-RPC client, the gallery and dialog systems - was dead code here, and
- * the endpoints behind it stopped existing when the site left Weebly.
+ * Takes over the two things Weebly's main.js can no longer do now that the
+ * site is hosted independently: submit a contact form, and run a search.
+ * Both pointed at Weebly services that stopped existing - formSubmit.php and
+ * /apps/search - so both were simply broken.
  *
- * Three jobs remain:
- *   1. relocateFlyoutMenus - reproduce the navigation DOM Weebly built.
- *   2. wireSearch          - send the header search to a local results page.
- *   3. wireForms           - submit contact forms without formSubmit.php.
+ * main.js still loads, from this repository rather than Weebly's CDN, because
+ * it hosts the marketplace "platform elements" embedded throughout the pages,
+ * including the mega-menu that draws the site's dropdown navigation. Replacing
+ * that is Phase 2; see MIGRATION.md.
  *
- * Depends on jQuery only for ordering: the theme's own custom.js runs on
- * jQuery's ready queue and must observe the same DOM Weebly left it, so this
- * file registers its handler first. Everything else here is plain DOM.
+ * Because main.js is still there, it still has its own delegated handlers on
+ * .wsite-button clicks and on the search button. This file loads after it and
+ * binds directly to those elements, so its handlers run first (target phase
+ * before bubble phase) and stop the event before Weebly's can act on it.
  */
 (function () {
   'use strict';
 
   var config = window.EVERARK_CONFIG || {};
-
-  /**
-   * Weebly lifted every top-level submenu out of the desktop navigation and
-   * parked it in a #wsite-menus container on <body>, which the theme hides
-   * outright (`#wsite-menus { display: none }` in main_style.css). The visible
-   * dropdowns come from the theme's own mega-menu, not from these.
-   *
-   * That sounds like something to simply delete, but it is load-bearing: the
-   * theme's custom.js decorates any nav item that still contains a submenu
-   * with a caret and an accordion toggle. Leaving the submenus in place would
-   * put carets in the desktop header that have never been there. So the move
-   * is reproduced exactly, and it has to happen before custom.js runs.
-   */
-  function relocateFlyoutMenus() {
-    var menu = document.querySelector('.menu-hidden .wsite-menu-default');
-    if (!menu) return;
-
-    var host = document.getElementById('wsite-menus');
-    if (!host) {
-      host = document.createElement('div');
-      host.id = 'wsite-menus';
-      document.body.appendChild(host);
-    }
-
-    var items = menu.children;
-    for (var i = 0; i < items.length; i++) {
-      var li = items[i];
-      if (li.tagName !== 'LI') continue;
-
-      li.classList.add('wsite-nav-' + (i + 1));
-      li.style.position = 'relative';
-
-      var link = li.querySelector(':scope > a.wsite-menu-item');
-      if (link) link.style.position = 'relative';
-
-      var wrap = li.querySelector(':scope > .wsite-menu-wrap');
-      if (wrap) {
-        wrap.style.display = 'none';
-        wrap.style.position = 'absolute';
-        host.appendChild(wrap);
-      }
-    }
-  }
 
   /** The header search box used to hit Weebly's /apps/search service. */
   function wireSearch() {
@@ -80,7 +38,12 @@
   }
 
   function submitOwnForm(form, event) {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+      // Weebly's own handler is delegated from the form; stop the event here
+      // so it never reaches /apps/search.
+      event.stopImmediatePropagation();
+    }
     var input = form.querySelector('.wsite-search-input');
     if (input && input.value.trim()) form.submit();
   }
@@ -108,6 +71,9 @@
       trigger.setAttribute('tabindex', '0');
       trigger.addEventListener('click', function (event) {
         event.preventDefault();
+        // main.js delegates its own .wsite-button handler from <form>; this
+        // runs first and keeps the event from reaching it.
+        event.stopImmediatePropagation();
         form.requestSubmit ? form.requestSubmit() : form.submit();
       });
       trigger.addEventListener('keydown', function (event) {
@@ -200,7 +166,7 @@
     })
       .then(function (response) {
         if (!response.ok) throw new Error('HTTP ' + response.status);
-        window.location.href = config.formRedirect || 'thank-you.html';
+        window.location.href = config.formRedirect || 'form-thank-you.html';
       })
       .catch(function () {
         if (trigger) trigger.textContent = original;
@@ -209,14 +175,6 @@
   }
 
   // ------------------------------------------------------------- bootstrap
-
-  // custom.js decorates the navigation on jQuery's ready queue, so the
-  // relocation has to be queued ahead of it - exactly the order Weebly had.
-  if (window.jQuery) {
-    window.jQuery(relocateFlyoutMenus);
-  } else {
-    document.addEventListener('DOMContentLoaded', relocateFlyoutMenus);
-  }
 
   function start() {
     wireSearch();

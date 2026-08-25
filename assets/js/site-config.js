@@ -18,8 +18,9 @@ window.EVERARK_CONFIG = {
    */
   formEndpoint: '',
 
-  /** Page shown after a successful submission. */
-  formRedirect: 'thank-you.html',
+  /** Page shown after a successful submission. Not thank-you.html, which the
+   * export uses to confirm an account cancellation. */
+  formRedirect: 'form-thank-you.html',
 
   /** Results page for the header search box. */
   searchPage: 'search.html',

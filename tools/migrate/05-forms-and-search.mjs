@@ -89,7 +89,7 @@ transformPages('migrate forms and search', (html, pageName) => {
 
       form = form.replace(
         /<form[^>]*>/,
-        `<form name="${name}" method="POST" action="thank-you.html"` +
+        `<form name="${name}" method="POST" action="form-thank-you.html"` +
           ` data-netlify="true" netlify-honeypot="bot-field" data-everark-form` +
           ` id="${(formHtml.match(/id="([^"]+)"/) || [, name])[1]}">` +
           `\n\t\t<input type="hidden" name="form-name" value="${name}" />` +

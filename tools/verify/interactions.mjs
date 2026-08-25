@@ -55,6 +55,8 @@ async function open(path) {
     topLevel: document.querySelectorAll('.menu-hidden .wsite-menu-default > li').length,
     sticky: !!document.querySelector('.sticky-wrapper'),
     toTop: !!document.getElementById('toTop'),
+    appReady: document.documentElement.appReady,
+    megaMenus: document.querySelectorAll('.codo-mega-menu-style').length,
   }));
   // Four top-level submenus move; the fifth is nested inside one of them and
   // travels with its parent. This matches what Weebly's runtime produced.
@@ -67,6 +69,8 @@ async function open(path) {
   check('mobile nav keeps its 5 accordion submenus', nav.mobileSubmenus === 5 && nav.mobileCarets === 5);
   check('9 top-level nav items', nav.topLevel === 9);
   check('theme sticky header and back-to-top still initialise', nav.sticky && nav.toTop);
+  check('platform elements initialise (appReady fired)', nav.appReady === 1, String(nav.appReady));
+  check('the mega-menu element is present on the page', nav.megaMenus === 9, String(nav.megaMenus));
 
   const logo = await page.getAttribute('.wsite-logo a', 'href');
   check('logo links home', logo === 'index.html', String(logo));
@@ -121,23 +125,37 @@ async function open(path) {
   await page.fill('input[name="email"]', 'ada@example.com');
   await page.click('form[data-everark-form] a.wsite-button');
   await page.waitForTimeout(1200);
-  check('a complete form submits', /thank-you/.test(page.url()) || page.url().includes('get-started-videos') === false, page.url());
+  check('a complete form submits to the confirmation page', /form-thank-you/.test(page.url()), page.url());
   await page.close();
 }
 
-// ------------------------------------------------------------- no weebly
+// ---------------------------------------------------- no Weebly at runtime
+// Phase 1's bar is that nothing is fetched from Weebly and nothing calls a
+// Weebly service - not that main.js is gone. It still runs, from this repo,
+// because it hosts the page's marketplace widgets. See MIGRATION.md.
 {
-  const { page } = await open('/');
-  const leftovers = await page.evaluate(() => ({
-    weeblyScripts: [...document.scripts]
-      .map((s) => s.src)
-      .filter((s) => /editmysite\.com\/js\/site\/main|templateArtifacts|stl\.js/.test(s)),
+  const page = await context.newPage();
+  const weeblyRequests = [];
+  page.on('request', (r) => {
+    if (/(editmysite|weebly)\.com|\/apps\/|formSubmit\.php|ajax\/api\/JsonRPC/.test(r.url()) && !r.url().includes('/assets/vendor/')) {
+      weeblyRequests.push(r.url());
+    }
+  });
+  const failures = [];
+  page.on('response', (r) => {
+    if (r.status() >= 400 && r.url().includes(ORIGIN)) failures.push(`${r.status()} ${r.url()}`);
+  });
+  await page.goto(`${ORIGIN}/`, { waitUntil: 'load', timeout: 60000 });
+  await page.waitForTimeout(4000);
+  check('no request goes to a Weebly host or service', weeblyRequests.length === 0, weeblyRequests.slice(0, 3).join(', '));
+  check('no local request 404s', failures.length === 0, failures.slice(0, 3).join(', '));
+
+  const markup = await page.evaluate(() => ({
     remoteWeebly: [...document.querySelectorAll('[src],[href]')]
       .map((e) => e.getAttribute('src') || e.getAttribute('href'))
       .filter((u) => u && /^(https?:)?\/\/[^/]*(editmysite|weebly)\.com/.test(u)),
   }));
-  check('no Weebly runtime scripts remain', leftovers.weeblyScripts.length === 0, leftovers.weeblyScripts.join(', '));
-  check('no page asset still loads from a Weebly host', leftovers.remoteWeebly.length === 0, leftovers.remoteWeebly.slice(0, 3).join(', '));
+  check('no markup still points at a Weebly host', markup.remoteWeebly.length === 0, markup.remoteWeebly.slice(0, 3).join(', '));
   await page.close();
 }
 

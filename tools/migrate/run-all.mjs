@@ -15,7 +15,7 @@ const STEPS = [
   ['01-restore-missing-assets.mjs', 'restore assets the export dropped'],
   ['02-vendor-external-assets.mjs', 'vendor Weebly-hosted assets'],
   ['03-remove-weebly-backend.mjs', 'remove the Weebly backend bootstrap'],
-  ['04-replace-weebly-runtime.mjs', 'swap main.js for everark.js'],
+  ['04-trim-weebly-runtime.mjs', 'trim the Weebly runtime, layer on everark.js'],
   ['05-forms-and-search.mjs', 'repoint forms and search'],
   ['06-build-search.mjs', 'build the search index and page'],
   ['07-metadata-and-cleanup.mjs', 'metadata, sitemap, markup fixes'],

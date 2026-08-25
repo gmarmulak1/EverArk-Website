@@ -1,5 +1,5 @@
 /**
- * Step 6 — build the search index and the results page.
+ * Step 6 — build the search index and the two generated pages.
  *
  * The index is derived from the pages themselves on every build, so it cannot
  * drift from the content. Only the body region is indexed: including the
@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ROOT, pages, readPage } from '../lib/refs.mjs';
+import { buildPage } from '../lib/page-template.mjs';
 
 /** Pages that are chrome, redirects or fragments rather than real content. */
 const EXCLUDE = new Set([
@@ -19,6 +20,7 @@ const EXCLUDE = new Set([
   '500-server-error.html',
   'search.html',
   'thank-you.html',
+  'form-thank-you.html',
   '_______________________.html',
   '_______________________1.html',
 ]);
@@ -65,13 +67,11 @@ fs.writeFileSync(path.join(ROOT, 'assets/search-index.json'), JSON.stringify(ind
 const kb = (fs.statSync(path.join(ROOT, 'assets/search-index.json')).size / 1024).toFixed(0);
 console.log(`indexed ${index.length} pages (${kb} KB)`);
 
-// ------------------------------------------------------------ search.html
-const TEMPLATE = 'resources.html';
-const template = readPage(TEMPLATE);
+// -------------------------------------------------------- generated pages
 
 // The site's h2 is 40px, which is right for a page heading and far too heavy
-// for a list of results. This is the one page with no prior appearance to
-// preserve, so it gets sizing of its own - built from the same typography.
+// for a list of results. These are the only pages with no prior appearance to
+// preserve, so they get sizing of their own - built from the same typography.
 const RESULTS_STYLE = `
 <style>
 	#everark-search-results .everark-search-result { margin: 0 0 28px; }
@@ -80,48 +80,45 @@ const RESULTS_STYLE = `
 	#everark-search-summary { margin-bottom: 24px; font-size: 15px !important; }
 </style>`;
 
-const RESULTS_UI = RESULTS_STYLE + `
+buildPage({
+  file: 'search.html',
+  title: 'Search - EVERARK',
+  description: 'Search the EverArk site.',
+  noindex: true,
+  scripts: ['assets/js/everark-search.js'],
+  content: `${RESULTS_STYLE}
 <div class="wsite-spacer" style="height:40px;"></div>
 <h2 class="wsite-content-title">Search</h2>
 <form id="everark-search-page-form" action="search.html" method="get" style="margin-bottom:20px;">
-\t<div class="wsite-form-field" style="margin:5px 0;">
-\t\t<div class="wsite-form-input-container">
-\t\t\t<input type="text" id="everark-search-input" name="q" class="wsite-form-input wsite-input wsite-input-width-370px" placeholder="Search everark.io" />
-\t\t</div>
-\t</div>
+	<div class="wsite-form-field" style="margin:5px 0;">
+		<div class="wsite-form-input-container">
+			<input type="text" id="everark-search-input" name="q" class="wsite-form-input wsite-input wsite-input-width-370px" placeholder="Search everark.io" />
+		</div>
+	</div>
 </form>
 <div class="paragraph" id="everark-search-summary"></div>
 <div id="everark-search-results"></div>
 <div class="wsite-spacer" style="height:60px;"></div>
-`;
+`,
+});
+console.log('wrote search.html');
 
-const contentStart = template.indexOf('<div id="wsite-content"');
-const contentEnd = template.indexOf('<div id="footer-wrap"');
-if (contentStart === -1 || contentEnd === -1) {
-  throw new Error(`cannot locate the content region in ${TEMPLATE}`);
-}
-
-const region = template.slice(contentStart, contentEnd);
-// The template page's body section is empty; drop the results UI into it.
-const filled = region.replace(
-  /(<div class="wsite-section-elements">)(\s*)(<\/div>)/,
-  (whole, open, gap, close) => `${open}${RESULTS_UI}${close}`,
-);
-if (filled === region) throw new Error(`no empty section found in ${TEMPLATE} to host results`);
-
-let search = template.slice(0, contentStart) + filled + template.slice(contentEnd);
-search = search
-  .replace(/<title>[\s\S]*?<\/title>/i, '<title>Search - EVERARK</title>')
-  .replace(
-    /<meta name="description" content="[^"]*"\s*\/?>/i,
-    '<meta name="description" content="Search the EverArk site." />',
-  )
-  .replace(/<meta name="robots"[^>]*>/gi, '')
-  .replace(/<\/head>/i, '\t\t<meta name="robots" content="noindex" />\n\t</head>')
-  .replace(
-    /<\/body>/i,
-    '\t<script src="assets/js/everark-search.js"></script>\n\t</body>',
-  );
-
-fs.writeFileSync(path.join(ROOT, 'search.html'), search);
-console.log(`wrote search.html from ${TEMPLATE}`);
+// The export already has a thank-you.html, but it confirms an account
+// cancellation ("Your account will now be closed immediately, and your
+// subscription cancelled"). Sending someone there after they request a demo
+// would be alarming, so form submissions get their own confirmation page.
+buildPage({
+  file: 'form-thank-you.html',
+  title: 'Thank You - EVERARK',
+  description: 'Thanks for getting in touch with EverArk.',
+  noindex: true,
+  content: `
+<div class="wsite-spacer" style="height:60px;"></div>
+<h2 class="wsite-content-title" style="text-align:center;">Thank you</h2>
+<div class="paragraph" style="text-align:center;">We have received your message and someone from the EverArk team will be in touch shortly.</div>
+<div class="wsite-spacer" style="height:20px;"></div>
+<div class="paragraph" style="text-align:center;">In the meantime you can <a href="cemetery-software-features.html">explore the features</a>, <a href="cemetery-software-pricing.html">see pricing</a>, or email us at <a href="mailto:hello@everark.io">hello@everark.io</a>.</div>
+<div class="wsite-spacer" style="height:80px;"></div>
+`,
+});
+console.log('wrote form-thank-you.html');

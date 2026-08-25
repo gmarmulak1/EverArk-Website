@@ -87,6 +87,30 @@ transformPages('metadata and cleanup', (html, pageName) => {
     out = out.replace(gtagBlocks[gtagBlocks.length - 1][0], '');
   }
 
+  // YouTube embeds use http://, which every browser blocks as mixed content
+  // once the site is served over https - so these 22 videos render as an empty
+  // box today. Same video, same embed, secure scheme.
+  out = out.replace(/src="http:\/\/www\.youtube\.com\//g, 'src="https://www.youtube.com/');
+
+  // The privacy policy's "Your Choices" links point at Weebly's editor - the
+  // editor rewrote what should have been a same-page anchor. The anchor it
+  // meant is on the page already.
+  out = out.replace(
+    /href="https:\/\/[0-9-]+\.preview\.editmysite\.com\/editor\/main\.php[^"]*"/g,
+    'href="#yourchoices"',
+  );
+
+  // Raleway's stylesheet is linked six times per page and Open Sans twice -
+  // an artefact of the theme's font pickers. Identical links, so all but the
+  // first are pure round-trips.
+  const seenFontLinks = new Set();
+  out = out.replace(/[ \t]*<link [^>]*fonts\/[A-Za-z_]+\/font\.css[^>]*>\n?/g, (tag) => {
+    const family = tag.match(/fonts\/([A-Za-z_]+)\/font\.css/)[1];
+    if (seenFontLinks.has(family)) return '';
+    seenFontLinks.add(family);
+    return tag;
+  });
+
   // Curly quotes made this meta tag unparseable as an attribute.
   out = out.replace(
     /<meta name=[”"]google-site-verification[”"]\s*\ncontent=[”"]([^”"]*)[”"]\s*\/>/,
@@ -111,6 +135,7 @@ const SKIP_FROM_SITEMAP = new Set([
   '404.html',
   '500-server-error.html',
   'search.html',
+  'form-thank-you.html',
   'thank-you.html',
   '_______________________.html',
   '_______________________1.html',
