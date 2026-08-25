@@ -49,7 +49,11 @@ function localPathFor(rawUrl) {
     const hash = crypto.createHash('sha1').update(url.search).digest('hex').slice(0, 10);
     p = `css/${hash}.css`;
   }
-  // A few Weebly asset URLs genuinely end in a dot; keep them addressable.
+  // A handful of the slider's asset URLs genuinely end in a dot. Serving them
+  // as .bin would send application/octet-stream and the images would not
+  // render, so recover the real type from the filename, which embeds it
+  // ("Icon-Feature-11-Admin.webp-634993ce007bb.").
+  p = p.replace(/\.(webp|png|jpe?g|gif|svg)-[0-9a-z]+\.$/i, (whole, ext) => whole.slice(0, -1) + '.' + ext.toLowerCase());
   p = p.replace(/\.$/, '.bin').replace(/\/$/, '/index');
   return `${VENDOR}/${url.hostname}/${p}`;
 }
@@ -157,6 +161,13 @@ function rewriteText(text, fromDir) {
     .replace(URL_IN_ATTR, (whole, u) => {
       const r = rewriteUrl(u, fromDir);
       return r ? whole.replace(u, r) : whole;
+    })
+    // The slider stores its image URLs inside a JSON blob, where every slash
+    // is backslash-escaped - invisible to the attribute and url() patterns.
+    .replace(/https?:\\\/\\\/[^"'\\\s]+/g, (escaped) => {
+      const plain = escaped.replace(/\\\//g, '/');
+      const r = rewriteUrl(plain, fromDir);
+      return r ? r.replace(/\//g, '\\/') : escaped;
     })
     .replace(/url\(\s*(["']?)((?:https?:)?\/\/[^)"'\s]+)\1\s*\)/g, (whole, q, u) => {
       const r = rewriteUrl(u, fromDir);

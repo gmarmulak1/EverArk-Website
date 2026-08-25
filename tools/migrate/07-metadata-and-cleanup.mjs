@@ -87,6 +87,10 @@ transformPages('metadata and cleanup', (html, pageName) => {
     out = out.replace(gtagBlocks[gtagBlocks.length - 1][0], '');
   }
 
+  // The one remaining third-party script on plain http. Both schemes serve the
+  // identical payload, and active mixed content is hard-blocked over https.
+  out = out.replace(/src="http:\/\/cdn\.rlets\.com\//g, 'src="https://cdn.rlets.com/');
+
   // YouTube embeds use http://, which every browser blocks as mixed content
   // once the site is served over https - so these 22 videos render as an empty
   // box today. Same video, same embed, secure scheme.
