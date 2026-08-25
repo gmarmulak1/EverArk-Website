@@ -1,0 +1,89 @@
+@-webkit-keyframes scroll-info-line {
+	from, 5% { width: 0px; }
+	33%,66% { left: 0px; width: 60px; }
+	95%, to { left: 60px; }
+}
+
+@keyframes scroll-info-line {
+	from, 5% { width: 0px; }
+	33%,66% { left: 0px; width: 60px; }
+	95%, to { left: 60px; }
+}
+div.paragraph, div.paragraph, .paragraph {
+	white-space: inherit;
+}
+#wrapper #banner {
+	z-index:unset;
+} 
+.header-title {
+	padding-left: 15px !important;
+}
+.boo-tooltip {
+    color: #656565;
+    font-size: 13px;
+    padding: 6px 14px 6px 14px;
+    position: absolute;
+    margin-right: 12px;
+    white-space: nowrap;
+    background-color: #fff;
+    display: inline-block;
+    right: 100%;
+    top: -2px;
+    border-radius: 3px;
+    font-weight: 500;
+    opacity: 0;
+    -webkit-transform-origin: 100% 50%;
+    -moz-transform-origin: 100% 50%;
+    -ms-transform-origin: 100% 50%;
+    -o-transform-origin: 100% 50%;
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transition: all 100ms ease-out;
+    -moz-transition: all 100ms ease-out;
+    -o-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
+    -webkit-box-shadow: -10px 0px 25px -1px rgba(0,0,0,0.05);
+    -moz-box-shadow: -10px 0px 25px -1px rgba(0,0,0,0.05);
+    box-shadow: -10px 0px 25px -1px rgba(0,0,0,0.05);
+}
+.menu-dots a:hover .boo-tooltip {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+} 
+.wsite-checkout-options__overlay{
+    display:none !important;
+}
+.wsite-checkout-options__radio{
+    opacity: 1 !important;
+    z-index: 1 !important;
+    display: inline-block !important;
+}
+.wsite-checkout-options__indicator{
+    border:0 none !important
+}
+#wrapper #header {
+	padding-left:30px;
+	padding-right:30px;
+}
+#header .navigation-button {
+	padding:0;
+}
+#icontent #wrapper {
+	padding-top:50px;
+}
+#icontent #wrapper #header{
+	margin-top:0px;
+}
+.search .wsite-search-input:focus {
+    background: none !important;
+}
+.wsite-page-searchresults #main-container .main {
+	padding-top: 150px;
+}

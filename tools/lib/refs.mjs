@@ -49,23 +49,50 @@ export function transformPages(label, fn) {
   return touched;
 }
 
-/** All local (non-absolute) href/src targets referenced by the pages. */
+/**
+ * Every local asset the pages ask for.
+ *
+ * The export references assets four different ways and all four have to be
+ * covered, or "everything resolves" is a false claim:
+ *   - double- and single-quoted src/href attributes
+ *   - url() inside <style> blocks
+ *   - url() inside inline style="" attributes, where the quotes arrive
+ *     HTML-escaped as &quot;
+ *   - root-absolute paths (/uploads/...), used by the background-image rules
+ */
 export function localRefs() {
   const found = new Map();
-  const attr = /(?:src|href)\s*=\s*"([^"]+)"/g;
+  const patterns = [
+    /(?:src|href)\s*=\s*"([^"]+)"/g,
+    /(?:src|href)\s*=\s*'([^']+)'/g,
+    /url\(\s*(?:&quot;|["'])?([^)"'\s]+?)(?:&quot;|["'])?\s*\)/g,
+  ];
   for (const name of pages()) {
     const html = readPage(name);
-    for (const m of html.matchAll(attr)) {
-      const raw = m[1].trim();
-      if (!raw || /^(https?:)?\/\//.test(raw)) continue;
-      if (/^(mailto:|tel:|javascript:|data:|about:|#|\/)/.test(raw)) continue;
-      const clean = raw.split(/[?#]/)[0];
-      if (!clean) continue;
-      if (!found.has(clean)) found.set(clean, new Set());
-      found.get(clean).add(name);
+    for (const pattern of patterns) {
+      for (const m of html.matchAll(pattern)) {
+        const rel = normaliseRef(m[1]);
+        if (!rel) continue;
+        if (!found.has(rel)) found.set(rel, new Set());
+        found.get(rel).add(name);
+      }
     }
   }
   return found;
+}
+
+/** Reduce a raw reference to a repo-relative path, or null if it is not ours. */
+export function normaliseRef(raw) {
+  const value = raw.trim().replace(/&amp;/g, '&');
+  if (!value) return null;
+  if (/^(https?:)?\/\//.test(value)) return null;
+  if (/^(mailto:|tel:|javascript:|data:|about:|#)/i.test(value)) return null;
+  const clean = value.split(/[?#]/)[0].replace(/^\/+/, '');
+  if (!clean || clean.endsWith('/')) return null;
+  // Weebly template placeholders such as +_background_image+ survive in the
+  // export's inline <style> blocks; they are tokens, not files.
+  if (/^\+.*\+$/.test(clean)) return null;
+  return clean;
 }
 
 export function exists(rel) {
