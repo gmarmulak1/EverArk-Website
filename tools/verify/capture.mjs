@@ -29,6 +29,11 @@ if (!SIDE) {
 const ORIGIN = process.env.ORIGIN || `http://localhost:${process.env.PORT || 8080}`;
 const OUT = path.join(ROOT, 'tools/verify/shots', SIDE);
 const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
+// How long to wait for images before shooting anyway. Raise it when comparing
+// two builds of very different weight: a heavier page can still have lazy
+// images in flight at the cap, and the shot then differs for that reason
+// alone rather than for anything the change did.
+const IMAGE_WAIT_MS = Number(process.env.IMAGE_WAIT_MS || 5000);
 
 const VIEWPORTS = [
   { name: 'desktop', width: 1440, height: 1000 },
@@ -110,7 +115,7 @@ for (const slug of list) {
       await page.goto(url, { waitUntil: 'load', timeout: 60000 });
       await page.addStyleTag({ content: STABILISE });
       // Scroll the full height so lazy/in-view content commits, then return.
-      await page.evaluate(async () => {
+      await page.evaluate(async (cap) => {
         const step = window.innerHeight;
         for (let y = 0; y < document.body.scrollHeight; y += step) {
           window.scrollTo(0, y);
@@ -133,9 +138,9 @@ for (const slug of list) {
               });
         await Promise.race([
           Promise.all([...document.images].map(settle)),
-          new Promise((r) => setTimeout(r, 5000)),
+          new Promise((r) => setTimeout(r, cap)),
         ]);
-      });
+      }, IMAGE_WAIT_MS);
       await page.waitForTimeout(400);
       await page.screenshot({
         path: path.join(OUT, `${slug}--${vp.name}.png`),
