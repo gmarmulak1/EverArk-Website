@@ -1,0 +1,55 @@
+# Netlify configuration for the standalone EverArk site.
+#
+# The repository is the deployable artefact - there is no build step - so
+# "publish" is the repo root and the build command only regenerates the
+# derived files (search index, sitemap, favicons) so they cannot go stale.
+
+[build]
+  publish = "."
+  command = "npm ci --omit=optional && npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Chromium is only needed for the favicon step, which is skipped when the
+  # generated icons are already committed.
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+# Export debris kept out of the git history's way but not part of the site.
+[[redirects]]
+  from = "/_archive/*"
+  to = "/404.html"
+  status = 404
+
+# Weebly served these pages without the .html suffix and they are linked that
+# way from elsewhere on the web. Keep those URLs alive.
+[[redirects]]
+  from = "/blog/:slug"
+  to = "/:slug.html"
+  status = 301
+
+[[redirects]]
+  from = "/apps/search"
+  to = "/search.html"
+  status = 301
+
+[[redirects]]
+  from = "/apps/*"
+  to = "/404.html"
+  status = 404
+
+[[headers]]
+  for = "/assets/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

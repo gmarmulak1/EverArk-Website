@@ -1,4 +1,4 @@
-@import url(//boocare.weebly.com/files/theme/boocss/infiniti.css?1777030118); @import url(theme/fonts/fonts.css?1777030118); ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, body, html, div.paragraph, p, blockquote, fieldset, input { margin: 0; padding: 0; }
+@import url(../assets/vendor/boocare.weebly.com/files/theme/boocss/infiniti.css); @import url(theme/fonts/fonts.css?1777030118); ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, body, html, div.paragraph, p, blockquote, fieldset, input { margin: 0; padding: 0; }
  table td { padding: 0; }
  ul { list-style: none; }
  fieldset, input { margin: 0; padding: 0; }

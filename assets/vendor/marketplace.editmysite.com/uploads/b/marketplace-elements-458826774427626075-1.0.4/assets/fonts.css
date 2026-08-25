@@ -1,0 +1,203 @@
+@font-face {
+  font-family: 'slideset-icon';
+  src:  url('fonts/slideset-icon.eot?llpfvq');
+  src:  url('fonts/slideset-icon.eot?llpfvq#iefix') format('embedded-opentype'),
+    url('fonts/slideset-icon.ttf?llpfvq') format('truetype'),
+    url('fonts/slideset-icon.woff?llpfvq') format('woff'),
+    url('fonts/slideset-icon.svg?llpfvq#slideset-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="slideset-icon-"], [class*=" slideset-icon-"], .uk-slidenav-previous, .uk-slidenav-next, .uk-dotnav li {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'slideset-icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.slideset-icon-Bullets_hover_1:before {
+  content: "\e900";
+}
+.slideset-icon-Bullets_hover_2:before {
+  content: "\e901";
+}
+.slideset-icon-uniE902:before {
+  content: "\e902";
+}
+.slideset-icon-uniE903:before {
+  content: "\e903";
+}
+.slideset-icon-uniE904:before {
+  content: "\e904";
+}
+.slideset-icon-uniE905:before {
+  content: "\e905";
+}
+.slideset-icon-uniE906:before {
+  content: "\e906";
+}
+.slideset-icon-Bullets_hover_5:before {
+  content: "\e907";
+}
+.slideset-icon-Bullets_hover_6:before {
+  content: "\e908";
+}
+.slideset-icon-Bullets_hover_7:before {
+  content: "\e909";
+}
+.slideset-icon-Bullets_hover_8:before {
+  content: "\e90a";
+}
+.slideset-icon-Bullets_hover_9:before {
+  content: "\e90b";
+}
+.slideset-icon-Bullets_hover_10:before {
+  content: "\e90c";
+}
+.slideset-icon-Bullets_normal_1:before {
+  content: "\e90d";
+}
+.slideset-icon-Bullets_normal_2:before {
+  content: "\e90e";
+}
+.slideset-icon-uniE90F:before {
+  content: "\e90f";
+}
+.slideset-icon-uniE910:before {
+  content: "\e910";
+}
+.slideset-icon-uniE911:before {
+  content: "\e911";
+}
+.slideset-icon-uniE912:before {
+  content: "\e912";
+}
+.slideset-icon-uniE913:before {
+  content: "\e913";
+}
+.slideset-icon-Bullets_normal_5:before {
+  content: "\e914";
+}
+.slideset-icon-Bullets_normal_6:before {
+  content: "\e915";
+}
+.slideset-icon-Bullets_normal_7:before {
+  content: "\e916";
+}
+.slideset-icon-Bullets_normal_8:before {
+  content: "\e917";
+}
+.slideset-icon-Bullets_normal_9:before {
+  content: "\e918";
+}
+.slideset-icon-Bullets_normal_10:before {
+  content: "\e919";
+}
+.slideset-icon-Left_arrow_1:before {
+  content: "\e91a";
+}
+.slideset-icon-Left_arrow_2:before {
+  content: "\e91b";
+}
+.slideset-icon-Left_Arrow_6:before {
+  content: "\e91c";
+}
+.slideset-icon-Left_Arrow_7:before {
+  content: "\e91d";
+}
+.slideset-icon-uniE91E:before {
+  content: "\e91e";
+}
+.slideset-icon-uniE91F:before {
+  content: "\e91f";
+}
+.slideset-icon-uniE920:before {
+  content: "\e920";
+}
+.slideset-icon-uniE921:before {
+  content: "\e921";
+}
+.slideset-icon-uniE922:before {
+  content: "\e922";
+}
+.slideset-icon-uniE923:before {
+  content: "\e923";
+}
+.slideset-icon-Left_Arrow_11:before {
+  content: "\e924";
+}
+.slideset-icon-uniE925:before {
+  content: "\e925";
+}
+.slideset-icon-uniE926:before {
+  content: "\e926";
+}
+.slideset-icon-Left_arrow_3:before {
+  content: "\e927";
+}
+.slideset-icon-uniE928:before {
+  content: "\e928";
+}
+.slideset-icon-uniE929:before {
+  content: "\e929";
+}
+.slideset-icon-uniE92A:before {
+  content: "\e92a";
+}
+.slideset-icon-uniE92B:before {
+  content: "\e92b";
+}
+.slideset-icon-uniE92C:before {
+  content: "\e92c";
+}
+.slideset-icon-Left_arrow_4-2:before {
+  content: "\e92d";
+}
+
+
+
+@-webkit-keyframes booshine {
+  100% {
+    left: 125%;
+  }
+}
+@keyframes booshine {
+  100% {
+    left: 125%;
+  }
+}
+@-webkit-keyframes boocircle {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+@keyframes boocircle {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}

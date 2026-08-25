@@ -1,0 +1,7 @@
+node_modules/
+.cache/
+.DS_Store
+
+# Local migration scratch: screenshots and diff reports are large and regenerable.
+/tools/verify/shots/
+/tools/verify/report/
