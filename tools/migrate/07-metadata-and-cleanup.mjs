@@ -53,8 +53,10 @@ transformPages('metadata and cleanup', (html, pageName) => {
   out = dropLinkContaining(out, 'fonts/Muli/font.css');
 
   // Absolute self-links: relative ones survive a domain change and work on a
-  // preview deploy. Canonical, og: and JSON-LD URLs stay absolute on purpose.
-  out = out.replace(/href="https?:\/\/(?:www\.)?everark\.io\/([^"]*)"/g, (whole, rest) => {
+  // preview deploy. Scoped to <a> deliberately - canonical, og: and JSON-LD
+  // URLs must stay absolute, and the canonical tag this script adds below
+  // would otherwise be relativised the next time the build runs.
+  out = out.replace(/<a\b[^>]*>/gi, (tag) => tag.replace(/href="https?:\/\/(?:www\.)?everark\.io\/([^"]*)"/g, (whole, rest) => {
     const [pathPart, fragment] = rest.split(/(?=#)/);
     if (pathPart === '' ) return 'href="index.html"';
     if (pathPart.startsWith('apps/')) return whole; // Weebly member routes, handled below
@@ -63,7 +65,7 @@ transformPages('metadata and cleanup', (html, pageName) => {
     if (fs.existsSync(path.join(ROOT, pathPart))) return `href="${rest}"`;
     if (fs.existsSync(path.join(ROOT, `${pathPart}.html`))) return `href="${pathPart}.html${fragment || ''}"`;
     return whole;
-  });
+  }));
 
   // The member login route was Weebly's; the product's own sign-in is at
   // everark.app, which the header button already points to.
@@ -72,12 +74,30 @@ transformPages('metadata and cleanup', (html, pageName) => {
     'href="https://everark.app/signup"',
   );
 
-  // The promo video embed builds an iframe pointing at http:///weebly/... -
-  // an empty host the export mangled. It renders nothing and the source video
-  // is gone from Weebly, so the dead embed goes; see MIGRATION.md.
+  // Guard against an earlier build having relativised the canonical before
+  // this bug was fixed.
   out = out.replace(
-    /<div class="wsite-video">[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/div>/,
-    (block) => (block.includes('generateVideo.php') ? '' : block),
+    /<link rel="canonical" href="(?!https?:)([^"]*)"\s*\/>/g,
+    (whole, rel) => `<link rel="canonical" href="${SITE_ORIGIN}/${rel === 'index.html' ? '' : rel}" />`,
+  );
+
+  // The homepage promo video is dead: its embed builds an iframe whose document
+  // loads http:///weebly/apps/generateVideo.php - an empty host the export
+  // mangled - and Weebly no longer has the source video.
+  //
+  // The surrounding block deliberately stays. Removing it shifted the whole
+  // homepage content column 180px left and cost 262px of height: it occupies
+  // real vertical space, and its container is part of the section nesting that
+  // gives .wsite-section-wrap its display:table.
+  //
+  // So only the dead script lines come out of the iframe's source string. The
+  // iframe is set to opacity 0 the moment it is created and its document never
+  // rendered anything, so this is invisible - it just stops the browser
+  // resolving a host that does not exist. Re-uploading a video is a content
+  // fix; see MIGRATION.md.
+  out = out.replace(
+    /^\s*\+ '<scr'\+'ipt type="text\/javascript" src="(?:http:\/{3}weebly\/apps\/generateVideo\.php|[^"]*jquery-2\.1\.4\.min\.js)[^"]*">\\x3C\/script>'$/gm,
+    '',
   );
 
   // gtag for UA-224885944-1 is injected twice per page; the second is a no-op

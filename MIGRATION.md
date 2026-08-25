@@ -9,19 +9,25 @@ was deliberately left alone, and what Phase 2 should pick up.
 Preserve the design exactly. Remove Weebly only where it was load-bearing for
 the site's ability to run, and verify every step rather than assume it.
 
-Two harnesses enforce that:
+Five harnesses enforce that:
 
 | Command | What it proves |
 | --- | --- |
 | `npm run dev` | serves the site the way a static host would |
-| `node tools/verify/capture.mjs <label>` | screenshots all pages at 1440 / 900 / 390 px |
-| `node tools/verify/compare.mjs <before> <after>` | pixel-diffs two snapshots, writes an HTML report |
-| `node tools/verify/interactions.mjs` | 19 behavioural checks: navigation structure, search, form validation and submission, and that nothing calls Weebly |
+| `node tools/verify/links.mjs` | every local `href`, `src` and `url()` resolves — instant, offline |
+| `node tools/verify/interactions.mjs` | 19 behavioural checks: navigation structure, search, form validation and submission |
+| `node tools/verify/requests.mjs` | loads all 141 pages in a browser and proves none of them calls Weebly |
+| `node tools/verify/capture.mjs <label>` then `compare.mjs <before> <after>` | screenshots every page at 1440 / 900 / 390 px and pixel-diffs two snapshots |
+
+The result that matters: **417 screenshots, all pixel-identical to the
+pre-change build at identical heights.**
 
 Comparing against the live everark.io in a browser is not possible from this
 environment, so each step is diffed against a snapshot of the step before it —
 which is the stricter test anyway: it catches drift where it is introduced
-rather than at the end.
+rather than at the end. It earned its keep twice: once when removing `main.js`
+silently broke the homepage carousel and hero, and once when removing the dead
+video block shifted the whole homepage content column 180 px left.
 
 ## What the export was actually like
 
@@ -69,12 +75,21 @@ here was reachable. Every global `main.js` still reads was left in place.
 The obvious move is to delete Weebly's 481 KB `main.js`. It is the wrong move,
 and it took an audit to see why.
 
-Each page embeds ~28 marketplace "platform elements", and every one of them is
-gated on an `appReady` event that **only `main.js` dispatches**. One of those
-elements is the site's mega-menu — the visible dropdown navigation, on all 139
-pages. Others draw the SVG section dividers, size the full-width hero, and
-drive the feature tabs, the FAQ accordion and the carousel. Remove `main.js`
-and they all silently never run.
+Each page embeds marketplace "platform elements" — up to 28 of them — and every
+one is gated on `document.documentElement.appReady`, which **only `main.js`
+sets**. (It is the flag, not the `appReady` event, that does the work: `main.js`
+is a blocking script in `<head>`, so by the time an element's inline script is
+parsed the flag is already `1` and it takes the synchronous branch. Nothing ever
+listens for the event.)
+
+One of those elements is the site's mega-menu, which injects the `<style>` block
+that governs how the dropdown navigation behaves on all 139 pages. Another is a
+UIkit slideset with no base CSS anywhere in the repo — the carousel is built
+entirely in JavaScript, and without it the homepage renders 40 stacked slides.
+Others draw the SVG section dividers and size the full-width hero band, whose
+`setWidth-full` width and offset likewise exist only as computed inline styles.
+Remove `main.js` and all of it silently never runs: measured directly, the flag
+stayed `0` and the hero lost its computed width.
 
 Reimplementing Weebly's `PlatformElement` framework to host them is a component
 overhaul, which Phase 1 rules out. So `main.js` stays — served from this
@@ -161,12 +176,26 @@ Added, none of which the site had: favicon, canonical URLs, `robots.txt`,
 
 ### Known broken, not fixable here
 
-The homepage promo video. The embed builds an iframe pointing at
+**The homepage promo video.** Its embed builds an iframe whose document loads
 `http:///weebly/apps/generateVideo.php` — an empty host, mangled by the export.
-It renders nothing today on the live Weebly site either, and the source video
+It renders nothing on the live Weebly site either, and the source video
 (`everark_promo_video_final_2022-06-25_591.mp4`) is no longer retrievable from
-Weebly. The dead embed was removed; **re-uploading the video is a content task
-for whoever still has the file.**
+Weebly. **Re-uploading it is a content task for whoever still has the file.**
+
+Only the dead script lines were taken out of the iframe's source string, not
+the block around them. Removing the block looked obviously right and was
+wrong: it shifted the entire homepage content column 180 px left and cost
+262 px of height, because the block occupies real vertical space and its
+container is part of the section nesting that gives `.wsite-section-wrap` its
+`display: table`. The pixel diff caught it.
+
+**Two Weebly base paths survive inside JavaScript strings** — `ASSETS_BASE`
+(Weebly's webpack publicPath) and each platform element's `assets_path`.
+Neither is safely rewritable: only four of the twelve element asset
+directories still exist upstream to vendor, so pointing them at local paths
+would swap a dead reference for a 404. `tools/verify/requests.mjs` loads every
+page and confirms neither ever becomes a real request. They go when `main.js`
+goes.
 
 ## Deploying
 
