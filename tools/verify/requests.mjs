@@ -7,14 +7,12 @@
  * answered by running the pages. This is the check that "the site no longer
  * depends on Weebly" is a fact rather than a hope.
  *
- * Third-party scripts are deliberately NOT blocked - the whole point is to see
- * where the page really goes - so the load event can stall behind an analytics
- * host that is slow or unreachable. Waiting on domcontentloaded plus a fixed
- * settle window avoids that without missing anything: every request the page
- * initiates is recorded from the moment navigation starts.
+ * Off-origin requests are recorded and then aborted: the observation is the
+ * whole point, and actually connecting to them is what makes the run
+ * impossible to finish here (see the route handler below).
  *
- * Still a pre-deploy check rather than a per-edit one. PAGES=n samples the
- * first n pages when you want a quick read.
+ * Still a pre-deploy check rather than a per-edit one. FROM and PAGES slice
+ * the run when you want a quick read.
  */
 import fs from 'node:fs';
 import { chromium } from 'playwright';
@@ -24,7 +22,11 @@ const ORIGIN = process.env.ORIGIN || `http://localhost:${process.env.PORT || 808
 const CHROMIUM = process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 const WEEBLY = /(editmysite|weebly)\.com/;
 
-const list = process.env.PAGES ? pages().slice(0, Number(process.env.PAGES)) : pages();
+// FROM/PAGES slice the run, for a quick read or to bisect a page that misbehaves.
+const FROM = Number(process.env.FROM || 0);
+const all = pages();
+const list = process.env.PAGES ? all.slice(FROM, FROM + Number(process.env.PAGES)) : all.slice(FROM);
+if (FROM || process.env.PAGES) console.log(`pages ${FROM}..${FROM + list.length - 1} of ${all.length}`);
 
 const browser = await chromium.launch({
   executablePath: fs.existsSync(CHROMIUM) ? CHROMIUM : undefined,
@@ -44,6 +46,25 @@ let scanned = 0;
  */
 let current = '';
 const page = await context.newPage();
+
+/**
+ * Record every off-origin request, then abort it.
+ *
+ * Aborting costs nothing in coverage - the request has already been observed,
+ * which is the entire question this script answers - and it is what makes the
+ * run finish. Left to connect, each page's dozen or so requests to analytics
+ * and widget hosts that are unreachable from a sandbox sit there occupying
+ * sockets; after twenty-odd pages Chromium's connection pool is full and every
+ * subsequent navigation blocks. Same-origin requests are always let through,
+ * so the page itself loads exactly as it would in the wild.
+ */
+await context.route('**/*', (route) => {
+  const url = route.request().url();
+  if (url.startsWith(ORIGIN) || url.startsWith('data:') || url === 'about:blank') {
+    return route.continue();
+  }
+  return route.abort();
+});
 
 page.on('request', (request) => {
   const url = request.url();
