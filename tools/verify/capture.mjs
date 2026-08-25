@@ -83,8 +83,18 @@ const BLOCK = process.env.BLOCK ? new RegExp(process.env.BLOCK) : null;
 
 await context.route('**/*', (route) => {
   const url = route.request().url();
-  if (BLOCKED.some((b) => url.includes(b))) return route.abort();
   if (BLOCK && BLOCK.test(url)) return route.abort();
+
+  // Everything off-origin is aborted, not just the list above. None of it is
+  // reachable from here and none of it belongs in a screenshot, but left to
+  // connect those requests hold sockets open until they time out; after
+  // twenty-odd pages Chromium's connection pool is full and the run stops
+  // making progress. Failing them immediately is the difference between a
+  // capture that finishes and one that does not.
+  if (!url.startsWith(ORIGIN) && !url.startsWith('data:') && url !== 'about:blank') {
+    return route.abort();
+  }
+  if (BLOCKED.some((b) => url.includes(b))) return route.abort();
   return route.continue();
 });
 
@@ -109,11 +119,22 @@ for (const slug of list) {
         window.scrollTo(0, 0);
         await new Promise((r) => setTimeout(r, 150));
         await document.fonts.ready;
-        await Promise.all(
-          [...document.images].map((i) =>
-            i.complete ? null : new Promise((r) => { i.onload = i.onerror = r; }),
-          ),
-        );
+
+        // Wait for images to settle, but never unconditionally: a lazy image
+        // inside a display:none container — the mega-menu is full of them —
+        // is deliberately never fetched, so it stays incomplete and fires
+        // neither load nor error. Waiting on those hangs the capture forever.
+        const settle = (img) =>
+          img.complete
+            ? Promise.resolve()
+            : new Promise((resolve) => {
+                img.addEventListener('load', resolve, { once: true });
+                img.addEventListener('error', resolve, { once: true });
+              });
+        await Promise.race([
+          Promise.all([...document.images].map(settle)),
+          new Promise((r) => setTimeout(r, 5000)),
+        ]);
       });
       await page.waitForTimeout(400);
       await page.screenshot({

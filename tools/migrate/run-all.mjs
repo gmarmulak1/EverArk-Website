@@ -1,4 +1,15 @@
 /**
+ * The one-time conversion of the Weebly export into this repository's shape.
+ *
+ * This is history, not the build. `npm run build` is tools/build/, which
+ * renders src/ into the flat pages at the root. These steps ran once, against
+ * the raw export, and are kept because they are the record of what was changed
+ * and why — every step's header explains a decision that is otherwise
+ * invisible in the result.
+ *
+ * Running them again would operate on the built output, which the next build
+ * overwrites from src/. Don't, unless you are re-deriving the migration.
+ *
  * Re-run the whole migration in order.
  *
  * Every step is idempotent, so this is safe to run against an already-migrated

@@ -1,0 +1,63 @@
+name: build
+
+# The repository is the deployable artefact, so the build's job is to prove
+# that what is committed is what src/ produces — and that nothing drifted.
+on:
+  # Branch pushes are covered by the pull_request trigger; listening to both
+  # runs every PR commit twice for an identical result.
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+
+      - name: Build
+        run: npm run build
+
+      - name: Committed pages match the build
+        # A page edited at the root instead of in src/ would be silently
+        # reverted by the next deploy. Fail here instead.
+        run: |
+          if ! git diff --quiet; then
+            echo "::error::The committed output differs from a fresh build."
+            echo "Edit src/, run npm run build, and commit the result."
+            git --no-pager diff --stat
+            exit 1
+          fi
+
+      - name: Every local reference resolves
+        run: node tools/verify/links.mjs
+
+      - name: Round-trip
+        run: node tools/verify/roundtrip.mjs
+
+  behaviour:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Serve and run the behaviour checks
+        run: |
+          npm run dev & sleep 3
+          node tools/verify/interactions.mjs
