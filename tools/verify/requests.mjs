@@ -36,22 +36,32 @@ const weeblyHits = new Map(); // url -> pages that requested it
 const localFailures = new Map();
 let scanned = 0;
 
+/**
+ * One page for the whole run, not one per URL. Closing a page whose
+ * third-party requests are still in flight blocks, and 141 of those in
+ * sequence never finishes. The listeners read `current` instead, so each
+ * request is still attributed to the page that made it.
+ */
+let current = '';
+const page = await context.newPage();
+
+page.on('request', (request) => {
+  const url = request.url();
+  if (WEEBLY.test(url) && !url.includes('/assets/vendor/')) {
+    if (!weeblyHits.has(url)) weeblyHits.set(url, new Set());
+    weeblyHits.get(url).add(current);
+  }
+});
+page.on('response', (response) => {
+  if (response.status() >= 400 && response.url().startsWith(ORIGIN)) {
+    const key = `${response.status()} ${response.url().slice(ORIGIN.length)}`;
+    if (!localFailures.has(key)) localFailures.set(key, new Set());
+    localFailures.get(key).add(current);
+  }
+});
+
 for (const name of list) {
-  const page = await context.newPage();
-  page.on('request', (request) => {
-    const url = request.url();
-    if (WEEBLY.test(url) && !url.includes('/assets/vendor/')) {
-      if (!weeblyHits.has(url)) weeblyHits.set(url, new Set());
-      weeblyHits.get(url).add(name);
-    }
-  });
-  page.on('response', (response) => {
-    if (response.status() >= 400 && response.url().startsWith(ORIGIN)) {
-      const key = `${response.status()} ${response.url().slice(ORIGIN.length)}`;
-      if (!localFailures.has(key)) localFailures.set(key, new Set());
-      localFailures.get(key).add(name);
-    }
-  });
+  current = name;
   try {
     await page.goto(`${ORIGIN}/${name === 'index.html' ? '' : name}`, {
       waitUntil: 'domcontentloaded',
@@ -61,7 +71,6 @@ for (const name of list) {
   } catch (err) {
     console.log(`  nav failed ${name}: ${err.message.split('\n')[0]}`);
   }
-  await page.close();
   scanned++;
   if (scanned % 20 === 0) console.log(`  ${scanned}/${list.length}`);
 }
