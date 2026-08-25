@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "EverArk marketing site \u2014 standalone static build, migrated off Weebly.",
+  "description": "EverArk marketing site — standalone static build, migrated off Weebly.",
   "scripts": {
     "dev": "node tools/serve.mjs",
     "build": "node tools/build/index.mjs",

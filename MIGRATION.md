@@ -1,8 +1,11 @@
 # Migrating EverArk off Weebly
 
-The site is a static export of the Weebly-hosted everark.io: 139 pages, ~1,900
-assets, no build step. This document records what Phase 1 changed and why, what
-was deliberately left alone, and what Phase 2 should pick up.
+The site began as a static export of the Weebly-hosted everark.io: 139 pages,
+~1,900 assets, no build step.
+
+**Phase 1** made it run standalone with no visible change. **Phase 2** made it
+maintainable. This document records both — what changed, what was deliberately
+left alone, and what is still open.
 
 ## The rule Phase 1 worked to
 
@@ -47,8 +50,9 @@ Worth stating plainly, because it shaped everything below.
 
 ## What Phase 1 changed
 
-Each numbered script in `tools/migrate/` is one step; `npm run build` runs them
-in order and every one is idempotent.
+Each numbered script in `tools/migrate/` is one step. They ran once, against
+the raw export, and are kept as the record of what was changed and why —
+`npm run build` is `tools/build/`, which renders `src/`.
 
 ### 1. Assets restored (`01`, `02`)
 
@@ -213,38 +217,99 @@ Before going live:
 3. Re-verify the Google Search Console property for the new host.
 4. Update the GA4 data-stream URL if the domain changes.
 
-## Phase 2
+## Phase 2 — what changed
 
-In the order that pays off soonest.
+Phase 1 left a site that worked but could not be edited: 141 pages each
+carrying their own copy of the header, footer and `<head>`.
 
-1. **Replace `main.js`.** Smaller than it looks, once the gate is understood.
-   The element bootstraps do not actually wait on the `appReady` *event* —
-   `main.js` is a blocking script in `<head>`, so by the time an element's
-   inline script is parsed, `document.documentElement.appReady` is already `1`
-   and it takes the synchronous branch. Reproducing that needs a `<head>`
-   script that sets the flag, plus a `platformElementRequire` shim supplying
-   jQuery, a small `_`, and a `PlatformElement` base class. Of the 12 distinct
-   elements in use, most extend `PlatformElement` with an empty body and need
-   nothing more; the handful with real behaviour (mega-menu, tabs, accordion,
-   carousel, hero sizing) are small enough to rewrite directly. Doing this drops
-   ~1 MB of dead JavaScript along with jQuery 1.8.3, which is long out of
-   support. Gate it on `tools/verify/` — that is what caught the first attempt.
-2. **Reusable header, footer and `<head>`.** Every page repeats ~40 KB of
-   identical chrome. `assets/nav.json` and `tools/lib/page-template.mjs` are the
-   start of this; a small generator turning content + layout into the same flat
-   HTML would leave the output byte-comparable and the source maintainable.
-3. **Content management for articles.** ~90 of the 139 pages are blog posts
-   sharing one layout. Moving their bodies to Markdown with front matter makes
-   them editable and makes the blog index and archive generated rather than
-   hand-maintained.
-4. **SEO components.** Canonicals and the sitemap are generated now; titles,
-   descriptions, Open Graph and JSON-LD are still hand-written per page and
-   drift. One block of front matter per page should drive all of them.
-5. **Image optimisation.** ~130 MB of images, many served far larger than they
-   render, and several `_orig` files alongside resized copies that no page uses.
-   Responsive `srcset` and a build-time resize step are the biggest single
-   performance win available.
-6. **Then, and only then, a framework.** Astro fits this shape — content
-   collections for the articles, components for the chrome, static HTML out. It
-   is worth doing *after* steps 1–5, because each of those is valuable on its
-   own and none of them requires it.
+### The chrome now lives in one place
+
+`src/` is the source; the root `.html` files are output. One file per page with
+a front matter block, plus eight shared partials. See
+[src/README.md](src/README.md).
+
+The split was computed rather than guessed — the shared `<head>` block is grown
+character by character until the pages actually disagree — and it found that
+40.3 MB of HTML held 23.9 MB of real content. The footer alone, 74 KB, was
+byte-identical on all 141 pages.
+
+`tools/verify/roundtrip.mjs` is what makes that safe: every page is rebuilt
+from `src/` and compared to the committed output **byte for byte**. A pixel
+diff would not catch a dropped meta tag or a mangled analytics snippet.
+
+### Social and structured data are generated
+
+`tools/build/lib/seo.mjs` derives the Open Graph, Twitter and JSON-LD tags from
+front matter. This was not cosmetic:
+
+| | before | after |
+| --- | --- | --- |
+| pages with social tags | 42 | 141 |
+| pages whose `og:url` pointed at another page | 40 | 0 |
+| pages emitting `twitter:description` twice | 37 | 0 |
+
+Sharing any of those 40 pages to Facebook or LinkedIn resolved to the wrong
+content.
+
+### Articles can be written in Markdown
+
+```sh
+npm run new-article "How to map a cemetery without losing a weekend"
+```
+
+Front matter drives the title, description, canonical, social card and
+BlogPosting data. Drafts are skipped by the build. The 61 posts carried over
+from Weebly are untouched — a legacy post inlines roughly 8 KB of font
+declarations per heading widget, covering 40 font families of which the site
+uses two; a Markdown article is its own text plus a 90-line stylesheet.
+
+`assets/articles.json` lists every article, new and legacy, newest first.
+
+### Images load when they are needed
+
+Measured across eight pages, a large share of downloaded images rendered at
+**0px** — mega-menu and hidden slider content, paid for on every page load.
+Marking everything below the banner `loading="lazy"` means the browser skips
+them until shown:
+
+| page | before | after |
+| --- | --- | --- |
+| index.html | 119 images, 0.57 MB | 13 images, 0.25 MB |
+| about-us.html | 58 images, 0.40 MB | 8 images, 0.13 MB |
+| blog.html | 103 images, 0.12 MB | 6 images, 0.03 MB |
+
+### CI
+
+`.github/workflows/build.yml` builds on every push and fails if the committed
+pages differ from a fresh build — which is what catches a page edited at the
+root instead of in `src/` and silently reverted by the next deploy.
+
+## Still open
+
+1. **Replace `main.js`.** Still the one real piece of Weebly left, and still
+   the largest single win available: ~481 KB plus jQuery 1.8.3, which is long
+   out of support. Smaller than it looks once the gate is understood — the
+   widget bootstraps do not wait on the `appReady` *event*; `main.js` is a
+   blocking script in `<head>`, so by the time an element's inline script is
+   parsed `document.documentElement.appReady` is already `1` and it takes the
+   synchronous branch. Reproducing that needs a `<head>` script setting the
+   flag plus a `platformElementRequire` shim supplying jQuery, a small `_`,
+   and a `PlatformElement` base class. Of the widget types in use most extend
+   `PlatformElement` with an empty body; the handful with real behaviour
+   (mega-menu, tabs, accordion, carousel, hero sizing) are small enough to
+   rewrite directly. Gate it on `tools/verify/` — that is what caught the
+   first attempt.
+2. **Responsive images.** Lazy loading took the easy win. What remains is
+   resizing the 122 files wider than 1600px (29 MB) and emitting `srcset`.
+   Doing it safely means measuring each image's rendered width in a browser
+   first, because a wrong `sizes` attribute means a blurry image rather than
+   a smaller one.
+3. **The blog index.** `blog.html` is 2.85 MB of widget cards and
+   `cemetery-blog-archives.html` another 3.2 MB, both hand-maintained.
+   Generating them from `assets/articles.json` would make adding a post a
+   one-file change — but their card layout would not survive unchanged, so
+   this is a design decision rather than a refactor.
+4. **A framework.** Astro fits this shape — content collections for the
+   articles, components for the chrome, static HTML out. Worth doing *after*
+   the above, because each of those is valuable on its own and none requires
+   it.

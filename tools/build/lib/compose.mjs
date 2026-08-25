@@ -7,6 +7,7 @@
  */
 import { applyActiveNav } from './page.mjs';
 import { renderSeo } from './seo.mjs';
+import { withLoadingHints } from './images.mjs';
 
 /** Whitespace between the <html> tag and <head>, identical on every page. */
 const PRE_HEAD = '\n\t';
@@ -54,8 +55,8 @@ export function compose({ data, content }, partials, site) {
     '</head>' +
     bodyOpen +
     header +
-    content +
-    pick('footer') +
+    withLoadingHints(content) +
+    withLoadingHints(pick('footer')) +
     pick('tail')
   );
 }
