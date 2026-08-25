@@ -187,12 +187,18 @@ Before going live:
 
 In the order that pays off soonest.
 
-1. **Replace `main.js`.** The blocker is the `appReady` gate and the
-   `PlatformElement` base class. The 12 distinct elements in use are inventoried
-   above; most extend `PlatformElement` with an empty body and need only a shim,
-   and the handful with real behaviour (mega-menu, tabs, accordion, carousel,
-   hero sizing) are small enough to rewrite directly. Doing this drops ~1 MB of
-   dead JavaScript and jQuery 1.8.3, which is long out of support.
+1. **Replace `main.js`.** Smaller than it looks, once the gate is understood.
+   The element bootstraps do not actually wait on the `appReady` *event* —
+   `main.js` is a blocking script in `<head>`, so by the time an element's
+   inline script is parsed, `document.documentElement.appReady` is already `1`
+   and it takes the synchronous branch. Reproducing that needs a `<head>`
+   script that sets the flag, plus a `platformElementRequire` shim supplying
+   jQuery, a small `_`, and a `PlatformElement` base class. Of the 12 distinct
+   elements in use, most extend `PlatformElement` with an empty body and need
+   nothing more; the handful with real behaviour (mega-menu, tabs, accordion,
+   carousel, hero sizing) are small enough to rewrite directly. Doing this drops
+   ~1 MB of dead JavaScript along with jQuery 1.8.3, which is long out of
+   support. Gate it on `tools/verify/` — that is what caught the first attempt.
 2. **Reusable header, footer and `<head>`.** Every page repeats ~40 KB of
    identical chrome. `assets/nav.json` and `tools/lib/page-template.mjs` are the
    start of this; a small generator turning content + layout into the same flat

@@ -29,13 +29,19 @@ The site's design is inherited from Weebly and is meant to stay put, so changes
 are checked rather than eyeballed.
 
 ```sh
+node tools/verify/links.mjs               # every local href/src/url() resolves
 node tools/verify/interactions.mjs        # 19 behavioural checks
+node tools/verify/requests.mjs            # load every page, prove nothing calls Weebly
 
 node tools/verify/capture.mjs before      # screenshot every page at 3 widths
 #   ...make the change...
 node tools/verify/capture.mjs after
 node tools/verify/compare.mjs before after   # pixel diff + HTML report
 ```
+
+`links.mjs` is instant and offline. `requests.mjs` drives a real browser over
+all 141 pages, so it is a pre-deploy check rather than a per-edit one; `PAGES=n`
+samples the first n.
 
 `capture.mjs` also takes `BLOCK=<regex>`, which aborts matching requests — the
 quickest way to answer "is this script actually load-bearing?" without editing
