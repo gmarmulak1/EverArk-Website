@@ -7,8 +7,14 @@
  * answered by running the pages. This is the check that "the site no longer
  * depends on Weebly" is a fact rather than a hope.
  *
- * Slow by design - it is a pre-deploy check, not a per-edit one. PAGES=n
- * samples the first n pages when you want a quick read.
+ * Third-party scripts are deliberately NOT blocked - the whole point is to see
+ * where the page really goes - so the load event can stall behind an analytics
+ * host that is slow or unreachable. Waiting on domcontentloaded plus a fixed
+ * settle window avoids that without missing anything: every request the page
+ * initiates is recorded from the moment navigation starts.
+ *
+ * Still a pre-deploy check rather than a per-edit one. PAGES=n samples the
+ * first n pages when you want a quick read.
  */
 import fs from 'node:fs';
 import { chromium } from 'playwright';
@@ -47,14 +53,17 @@ for (const name of list) {
     }
   });
   try {
-    await page.goto(`${ORIGIN}/${name === 'index.html' ? '' : name}`, { waitUntil: 'load', timeout: 60000 });
-    await page.waitForTimeout(2000);
+    await page.goto(`${ORIGIN}/${name === 'index.html' ? '' : name}`, {
+      waitUntil: 'domcontentloaded',
+      timeout: 30000,
+    });
+    await page.waitForTimeout(2500);
   } catch (err) {
     console.log(`  nav failed ${name}: ${err.message.split('\n')[0]}`);
   }
   await page.close();
   scanned++;
-  if (scanned % 25 === 0) console.log(`  ${scanned}/${list.length}`);
+  if (scanned % 20 === 0) console.log(`  ${scanned}/${list.length}`);
 }
 
 await browser.close();
