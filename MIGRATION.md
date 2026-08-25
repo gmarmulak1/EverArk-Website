@@ -19,8 +19,9 @@ Five harnesses enforce that:
 | `node tools/verify/requests.mjs` | loads all 141 pages in a browser and proves none of them calls Weebly |
 | `node tools/verify/capture.mjs <label>` then `compare.mjs <before> <after>` | screenshots every page at 1440 / 900 / 390 px and pixel-diffs two snapshots |
 
-The result that matters: **417 screenshots, all pixel-identical to the
-pre-change build at identical heights.**
+The results that matter: **417 screenshots, all pixel-identical to the
+pre-change build at identical heights**, and **141 pages loaded in a browser
+with zero requests to a Weebly host and zero failing local requests.**
 
 Comparing against the live everark.io in a browser is not possible from this
 environment, so each step is diffed against a snapshot of the step before it —
