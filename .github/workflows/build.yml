@@ -3,9 +3,15 @@ name: build
 # The repository is the deployable artefact, so the build's job is to prove
 # that what is committed is what src/ produces — and that nothing drifted.
 on:
+  # Branch pushes are covered by the pull_request trigger; listening to both
+  # runs every PR commit twice for an identical result.
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
