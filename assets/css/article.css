@@ -1,0 +1,97 @@
+/*
+ * Article styling.
+ *
+ * Selectors are prefixed with #wsite-content on purpose: the theme styles
+ * headings through `#wsite-content h2 { … !important }`, and an ID beats a
+ * class no matter how many !importants a class rule carries.
+ *
+ * The legacy posts get their heading style from a Weebly widget that inlines
+ * roughly 8 KB of font declarations into every page — 40 font families, of
+ * which the site uses two. New articles written in Markdown use these rules
+ * instead, which is the same result in about 40 lines.
+ */
+
+#wsite-content .everark-article {
+  /* Matches the column width the legacy posts get from their layout table,
+     so old and new articles line up when read one after the other. */
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#wsite-content .everark-article .article-date {
+  font-family: 'Raleway', sans-serif;
+  font-size: 15px;
+  color: #626262;
+  margin-bottom: 8px;
+}
+
+#wsite-content .everark-article h1 {
+  text-align: center;
+  color: #3f3f3f;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1.1;
+  margin: 0 0 24px;
+  text-transform: none;
+}
+
+/* The theme sets #wsite-content h2 to 40px uppercase with !important, which
+   is right for a section heading and wrong for a subhead inside an article. */
+#wsite-content .everark-article h2 {
+  color: #3f3f3f;
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 28px !important;
+  line-height: 1.2 !important;
+  margin: 36px 0 12px !important;
+  text-transform: none !important;
+  text-align: left !important;
+}
+
+#wsite-content .everark-article h3 {
+  color: #3f3f3f;
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 21px !important;
+  margin: 28px 0 10px !important;
+  text-transform: none !important;
+}
+
+#wsite-content .everark-article p,
+#wsite-content .everark-article li {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #2a2a2a;
+}
+
+#wsite-content .everark-article p { margin: 0 0 18px; text-align: justify; }
+#wsite-content .everark-article ul,
+#wsite-content .everark-article ol { margin: 0 0 18px; padding-left: 1.4em; }
+#wsite-content .everark-article li { margin-bottom: 8px; }
+
+#wsite-content .everark-article a { color: #2a2a2a; text-decoration: underline; }
+#wsite-content .everark-article a:hover { color: #4bc869; }
+
+#wsite-content .everark-article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+}
+
+#wsite-content .everark-article blockquote {
+  margin: 24px 0;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid #4bc869;
+  color: #626262;
+}
+
+@media (max-width: 767px) {
+  #wsite-content .everark-article h1 { font-size: 30px; }
+  #wsite-content .everark-article h2 { font-size: 23px !important; }
+  #wsite-content .everark-article p,
+  #wsite-content .everark-article li { font-size: 16px; }
+  #wsite-content .everark-article p { text-align: left; }
+}

@@ -12,8 +12,10 @@
 import { buildAll } from './render.mjs';
 import { buildSearchIndex } from './search-index.mjs';
 import { buildSitemap } from './sitemap.mjs';
+import { buildArticlesIndex } from './articles-index.mjs';
 
 const pagesBuilt = buildAll();
 console.log(`pages        ${pagesBuilt.length}`);
 console.log(`search index ${buildSearchIndex()} entries`);
 console.log(`sitemap      ${buildSitemap()} urls`);
+console.log(`articles     ${buildArticlesIndex().length} entries`);

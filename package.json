@@ -3,18 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "EverArk marketing site — standalone static build, migrated off Weebly.",
+  "description": "EverArk marketing site \u2014 standalone static build, migrated off Weebly.",
   "scripts": {
     "dev": "node tools/serve.mjs",
     "build": "node tools/build/index.mjs",
     "verify": "node tools/verify/roundtrip.mjs && node tools/verify/links.mjs && node tools/verify/interactions.mjs",
     "verify:requests": "node tools/verify/requests.mjs",
     "snapshot": "node tools/verify/capture.mjs",
-    "diff": "node tools/verify/compare.mjs"
+    "diff": "node tools/verify/compare.mjs",
+    "new-article": "node tools/new-article.mjs"
   },
   "devDependencies": {
-    "playwright": "^1.49.0",
     "pixelmatch": "^6.0.0",
+    "playwright": "^1.49.0",
     "pngjs": "^7.0.0"
+  },
+  "dependencies": {
+    "marked": "^18.0.11"
   }
 }

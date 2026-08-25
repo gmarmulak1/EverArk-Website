@@ -95,3 +95,42 @@ those with the screenshot harness first.
 from the built pages, and `tools/migrate/09-extract-social.mjs` lifted the
 social values into front matter. Both are kept as the record of how this
 directory was derived.
+
+## Articles
+
+Posts carried over from Weebly are page sources like any other — they keep the
+markup they were exported with. New ones are written in Markdown:
+
+```sh
+npm run new-article "How to map a cemetery without losing a weekend"
+# fills in src/articles/<slug>.md, marked draft
+npm run build
+```
+
+```markdown
+---
+title: How to map a cemetery without losing a weekend
+date: 2026-09-01
+description: Shown in search results and on the social card.
+draft: true
+---
+
+Ordinary Markdown.
+```
+
+`title`, `date` and `description` are required. Optional: `keywords`, `image`,
+`tags`, `banner` / `bannerImage`, `seoTitle`, `draft`. Files starting with `_`
+and anything with `draft: true` are skipped by the build, so an unfinished post
+can sit in the repository safely. `src/articles/_example.md` documents the
+format in full.
+
+Articles render through `src/layouts/article.html` and are styled by
+`assets/css/article.css` — about 40 lines. A legacy post inlines roughly 8 KB
+of font declarations per heading widget instead, covering 40 font families of
+which the site uses two.
+
+`assets/articles.json` lists every article, new and legacy, newest first.
+Nothing consumes it yet: the blog index and archive pages are still the
+hand-built ones from the export, and replacing their card layout is a visible
+change rather than a refactor. The data is kept accurate from now on so that
+work does not have to reconstruct it.
