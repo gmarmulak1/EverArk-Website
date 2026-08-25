@@ -105,7 +105,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="stylesheet" type="text/css" href="files/main_style.css?1777030118" title="wsite-theme-css" />
 <link href='assets/vendor/cdn2.editmysite.com/fonts/Lato/font.css' rel='stylesheet' type='text/css' />
 <link href='assets/vendor/cdn2.editmysite.com/fonts/Montserrat/font.css' rel='stylesheet' type='text/css' />
-<link href='http://cdn2.editmysite.com/fonts/Muli/font.css?2' rel='stylesheet' type='text/css' />
+
 <link href='assets/vendor/cdn2.editmysite.com/fonts/Oxygen/font.css' rel='stylesheet' type='text/css' />
 
 <link href='assets/vendor/cdn2.editmysite.com/fonts/Raleway/font.css' rel='stylesheet' type='text/css' />
@@ -205,88 +205,34 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	}
 </style>
 
-<link rel="stylesheet" type="text/css" href="assets/vendor/cdn11.editmysite.com/css/site_membership.css">
-
 		<script
   type="text/javascript"
   src="https://app.termly.io/embed.min.js"
   data-auto-block="on"
   data-website-uuid="60d00aa2-512f-451f-9efd-78af657d898b"
-  ></script><script src='files/templateArtifacts.js?1776444361'></script>
+  ></script>
 <script>
-var STATIC_BASE = '//cdn1.editmysite.com/';
 var ASSETS_BASE = '//cdn11.editmysite.com/';
 var STYLE_PREFIX = 'wsite';
 </script>
 <script src='assets/vendor/cdn11.editmysite.com/js/jquery-1.8.3.min.js'></script>
 
-<script type="text/javascript" src="assets/vendor/cdn2.editmysite.com/js/lang/en/stl.js"></script>
-<script src="assets/vendor/cdn11.editmysite.com/js/site/main.js"></script><script type="text/javascript">
-		function initCustomerAccountsModels() {
-					(function(){_W.setup_rpc({"url":"\/ajax\/api\/JsonRPC\/CustomerAccounts\/","actions":{"CustomerAccounts":[{"name":"login","len":2,"multiple":false,"standalone":false},{"name":"logout","len":0,"multiple":false,"standalone":false},{"name":"getSessionDetails","len":0,"multiple":false,"standalone":false},{"name":"getAccountDetails","len":0,"multiple":false,"standalone":false},{"name":"getOrders","len":0,"multiple":false,"standalone":false},{"name":"register","len":4,"multiple":false,"standalone":false},{"name":"emailExists","len":1,"multiple":false,"standalone":false},{"name":"passwordReset","len":1,"multiple":false,"standalone":false},{"name":"passwordUpdate","len":3,"multiple":false,"standalone":false},{"name":"validateSession","len":1,"multiple":false,"standalone":false}]},"namespace":"_W.CustomerAccounts.RPC"});
-_W.setup_model_rpc({"rpc_namespace":"_W.CustomerAccounts.RPC","model_namespace":"_W.CustomerAccounts.BackboneModelData","collection_namespace":"_W.CustomerAccounts.BackboneCollectionData","bootstrap_namespace":"_W.CustomerAccounts.BackboneBootstrap","models":{"CustomerAccounts":{"_class":"CustomerAccounts.Model.CustomerAccounts","defaults":null,"validation":null,"types":null,"idAttribute":null,"keydefs":null}},"collections":{"CustomerAccounts":{"_class":"CustomerAccounts.Collection.CustomerAccounts"}},"bootstrap":[]});
-})();
-		}
-		if(document.createEvent && document.addEventListener) {
-			var initEvt = document.createEvent('Event');
-			initEvt.initEvent('customerAccountsModelsInitialized', true, false);
-			document.dispatchEvent(initEvt);
-		} else if(document.documentElement.initCustomerAccountsModels === 0){
-			document.documentElement.initCustomerAccountsModels++
-		}
-		</script>
-		<script type="text/javascript"> _W = _W || {}; _W.securePrefix='UNSET'; </script><script>_W = _W || {};
-			_W.customerLocale = "en_US";
-			_W.storeName = null;
-			_W.isCheckoutReskin = false;
-			_W.storeCountry = "US";
-			_W.storeCurrency = "USD";
-			_W.storeEuPrivacyPolicyUrl = "";
-			com_currentSite = "560408082872959119";
-			com_userID = "107572223";</script><script type="text/javascript"> _W = _W || {}; _W.securePrefix='UNSET'; </script><script type="text/javascript">
-								_W = window._W || {};
-								_W.allowMemberRegistration = false;
-								_W.showLogin = false;
-							</script><script type="text/javascript">
-					function initMembershipModels() {
-						(function(){_W.setup_rpc({"url":"\/ajax\/api\/JsonRPC\/Membership\/","actions":{"Member":[{"name":"getRedirectUrl","len":1,"multiple":false,"standalone":false},{"name":"getOriginUrl","len":0,"multiple":false,"standalone":false},{"name":"getSecureMemberUrl","len":0,"multiple":false,"standalone":false},{"name":"validate_user","len":2,"multiple":false,"standalone":false},{"name":"get_account_information","len":0,"multiple":false,"standalone":false},{"name":"get_session_details","len":0,"multiple":false,"standalone":false},{"name":"register_member","len":5,"multiple":false,"standalone":false},{"name":"validate_session","len":1,"multiple":false,"standalone":false},{"name":"set_password","len":3,"multiple":false,"standalone":false},{"name":"send_reset_password_email","len":1,"multiple":false,"standalone":false},{"name":"create","len":1,"multiple":false,"standalone":false},{"name":"readOne","len":1,"multiple":false,"standalone":false},{"name":"readMany","len":1,"multiple":false,"standalone":false},{"name":"update","len":1,"multiple":false,"standalone":false},{"name":"patch","len":1,"multiple":false,"standalone":false},{"name":"destroy","len":1,"multiple":false,"standalone":false}]},"namespace":"_W.Membership.RPC"});
-_W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Membership.BackboneModelData","collection_namespace":"_W.Membership.BackboneCollectionData","bootstrap_namespace":"_W.Membership.BackboneBootstrap","models":{"Member":{"_class":"Membership.Model.Member","defaults":{"class_name":null,"name":null,"email":"","access_token":null,"token_expiry_date":null,"last_ip":null,"last_login":null,"approved":false,"password_set":null,"group_ids":null,"page_ids":null,"group_page_ids":null,"owner_id":"","site_id":"","updated_date":0,"created_date":0},"validation":{"class_name":null,"site_member_id":null,"name":null,"email":{"email":null,"required":true},"access_token":null,"token_expiry_date":null,"last_ip":null,"last_login":null,"approved":null,"password_set":null,"group_ids":null,"page_ids":null,"group_page_ids":null,"owner_id":{"required":true},"site_id":{"required":true},"updated_date":null,"created_date":null},"types":{"class_name":null,"site_member_id":"string","name":"string","email":"string","access_token":"string","token_expiry_date":"int","last_ip":"string","last_login":"int","approved":"boolean","password_set":"boolean","group_ids":"json","page_ids":"json","group_page_ids":"json","owner_id":"string","site_id":"string","updated_date":"int","created_date":"int"},"idAttribute":"site_member_id","keydefs":{"PRIMARY":["owner_id","site_id","site_member_id"],"idx_owner_site_account":["owner_id","site_id","site_account_id"]}}},"collections":{"Member":{"_class":"Membership.Collection.Member"}},"bootstrap":[]});
-})();
-					}
-					if(document.createEvent && document.addEventListener) {
-						var initEvt = document.createEvent('Event');
-						initEvt.initEvent('membershipModelsInitialized', true, false);
-						document.dispatchEvent(initEvt);
-					} else if(document.documentElement.initMembershipModels === 0){
-						document.documentElement.initMembershipModels++
-					}
-					</script><script src='assets/vendor/cdn11.editmysite.com/js/site/main-membership-site.js'></script>
-<script type="text/javascript">_W.configDomain = "";</script><script>_W.relinquish && _W.relinquish()</script>
-<script type="text/javascript" src="assets/vendor/cdn2.editmysite.com/js/lang/en/stl.js"></script><script> _W.themePlugins = [];</script><script type="text/javascript"> _W.recaptchaUrl = "https://www.google.com/recaptcha/api.js"; </script><script type="text/javascript"><!--
-	var IS_ARCHIVE = 1;
-	
-	function initFlyouts(){
-		initPublishedFlyoutMenus(
-			[{"id":"807137216236635356","title":"Tour","url":"index.html","target":"","nav_menu":false,"nonclickable":false},{"id":"845932459489649873","title":"Features","url":"cemetery-software-features.html","target":"","nav_menu":false,"nonclickable":false},{"id":"991955371594641585","title":"Pricing","url":"cemetery-software-pricing.html","target":"","nav_menu":false,"nonclickable":false},{"id":"857041114654827260","title":"Partners","url":"cemetery-software-partners.html","target":"","nav_menu":false,"nonclickable":false},{"id":"268383861935122927","title":"Blog","url":"blog.html","target":"","nav_menu":false,"nonclickable":false},{"id":"279254457369157478","title":"Resources","url":"resources.html","target":"","nav_menu":false,"nonclickable":true},{"id":"556297257270355358","title":"Find a Digitaph","url":"find-a-digitaph.html","target":"","nav_menu":false,"nonclickable":true},{"id":"605163974314908484","title":"Buy a Plot","url":"buy-a-plot.html","target":"","nav_menu":false,"nonclickable":true},{"id":"855886954509371694","title":"Login | Sign Up","url":"login--sign-up.html","target":"","nav_menu":false,"nonclickable":true}],
-			"143042505536797061",
-			'',
-			'active',
-			false,
-			{"navigation\/item":"<li {{#id}}id=\"{{id}}\"{{\/id}} class=\"wsite-menu-item-wrap\">\n\t<a\n\t\t{{^nonclickable}}\n\t\t\t{{^nav_menu}}\n\t\t\t\thref=\"{{url}}\"\n\t\t\t{{\/nav_menu}}\n\t\t{{\/nonclickable}}\n\t\t{{#target}}\n\t\t\ttarget=\"{{target}}\"\n\t\t{{\/target}}\n\t\t{{#membership_required}}\n\t\t\tdata-membership-required=\"{{.}}\"\n\t\t{{\/membership_required}}\n\t\tclass=\"wsite-menu-item\"\n\t\t>\n\t\t{{{title_html}}}\n\t<\/a>\n\t{{#has_children}}{{> navigation\/flyout\/list}}{{\/has_children}}\n<\/li>\n","navigation\/flyout\/list":"<div class=\"wsite-menu-wrap\" style=\"display:none\">\n\t<ul class=\"wsite-menu\">\n\t\t{{#children}}{{> navigation\/flyout\/item}}{{\/children}}\n\t<\/ul>\n<\/div>\n","navigation\/flyout\/item":"<li {{#id}}id=\"{{id}}\"{{\/id}}\n\tclass=\"wsite-menu-subitem-wrap {{#is_current}}wsite-nav-current{{\/is_current}}\"\n\t>\n\t<a\n\t\t{{^nonclickable}}\n\t\t\t{{^nav_menu}}\n\t\t\t\thref=\"{{url}}\"\n\t\t\t{{\/nav_menu}}\n\t\t{{\/nonclickable}}\n\t\t{{#target}}\n\t\t\ttarget=\"{{target}}\"\n\t\t{{\/target}}\n\t\tclass=\"wsite-menu-subitem\"\n\t\t>\n\t\t<span class=\"wsite-menu-title\">\n\t\t\t{{{title_html}}}\n\t\t<\/span>{{#has_children}}<span class=\"wsite-menu-arrow\">&gt;<\/span>{{\/has_children}}\n\t<\/a>\n\t{{#has_children}}{{> navigation\/flyout\/list}}{{\/has_children}}\n<\/li>\n"},
-			{"hasCustomMinicart":true}
-		)
-	}
-//-->
-</script>
+<script></script>
 		
 		<script src="https://www.getgobot.com/app/connect/weebly/560408082872959119/107572223/gobot.js"></script>
+			<script src="assets/js/site-config.js"></script>
+		<script src="assets/js/everark.js"></script>
+			<link rel="icon" href="assets/favicon/favicon-32.png" sizes="32x32" type="image/png" />
+		<link rel="icon" href="assets/favicon/favicon-192.png" sizes="192x192" type="image/png" />
+		<link rel="apple-touch-icon" href="assets/favicon/apple-touch-icon.png" />
+			<link rel="canonical" href="cemetery-software-interview.html" />
 	</head>
 	<body class="no-header  wsite-theme-light  wsite-page-cemetery-software-interview header-title-off phone-number-on location-on time-open-off top-header-sticky-on sticky-nav-on custom-option-on menu-style-3 sticky-button-on ToTop-on section-6-off section-7-off section-26-off section-27-off section-36-off section-37-off slide-24-off slide-25-off "><div id="wrapper">
       <div id="wrapper_header">
         <div class="search clearfix">
           <div class="main clearfix">
             <span class="wsite-search">
-	<form id="wsite-header-search-form" action="/apps/search" method="get">
+	<form id="wsite-header-search-form" action="search.html" method="get">
 		<input type="text" name="q" class="wsite-search-input" autocomplete="off" placeholder="Search"/><span class="wsite-search-button"><span class="wsite-search-button-inner"></span></span>
 	</form>
 </span>
@@ -321,7 +267,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
         <div id="navigation">
           <div class="logo"><span class="wsite-logo">
 
-	<a href="">
+	<a href="index.html">
 		<img src="uploads/1/0/7/5/107572223/everark-long-tm.webp" alt="EVERARK" />
 	</a>
 
@@ -446,7 +392,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 	class="wsite-menu-subitem-wrap "
 	>
 	<a
-				href="https://www.everark.io/cemetery-software-features.html#lovedones"
+				href="cemetery-software-features.html#lovedones"
 		class="wsite-menu-subitem"
 		>
 		<span class="wsite-menu-title">
@@ -495,7 +441,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 	class="wsite-menu-subitem-wrap "
 	>
 	<a
-				href="https://www.everark.io/cemetery-software-partners.html#partnerform"
+				href="cemetery-software-partners.html#partnerform"
 		class="wsite-menu-subitem"
 		>
 		<span class="wsite-menu-title">
@@ -508,7 +454,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 	class="wsite-menu-subitem-wrap "
 	>
 	<a
-				href="https://www.everark.io/cemetery-software-partners.html#leadform"
+				href="cemetery-software-partners.html#leadform"
 		class="wsite-menu-subitem"
 		>
 		<span class="wsite-menu-title">
@@ -813,7 +759,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 	class="wsite-menu-subitem-wrap "
 	>
 	<a
-				href="https://www.everark.io/cemetery-software-features.html#lovedones"
+				href="cemetery-software-features.html#lovedones"
 		class="wsite-menu-subitem"
 		>
 		<span class="wsite-menu-title">
@@ -862,7 +808,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 	class="wsite-menu-subitem-wrap "
 	>
 	<a
-				href="https://www.everark.io/cemetery-software-partners.html#partnerform"
+				href="cemetery-software-partners.html#partnerform"
 		class="wsite-menu-subitem"
 		>
 		<span class="wsite-menu-title">
@@ -875,7 +821,7 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 	class="wsite-menu-subitem-wrap "
 	>
 	<a
-				href="https://www.everark.io/cemetery-software-partners.html#leadform"
+				href="cemetery-software-partners.html#leadform"
 		class="wsite-menu-subitem"
 		>
 		<span class="wsite-menu-title">
@@ -1082,16 +1028,10 @@ _W.setup_model_rpc({"rpc_namespace":"_W.Membership.RPC","model_namespace":"_W.Me
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:13.783783783784%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:74.594594594595%; padding:0 15px;">
-					
-						
 
 <div class="paragraph">4/14/2022</div>
 
@@ -1394,16 +1334,10 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="paragraph">&#8203;<span style="color:rgb(3, 3, 3)">Gail Rubin, a well-known death educator, interviews Greg Marmulak, CEO with EverArk Cemetery Software, at the International Cemetery, Cremation and Funeral Association's 2022 Convention and Expo.</span></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:11.621621621622%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1416,8 +1350,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
 
 <div style="text-align:right;"><div style="height: 0px; overflow: hidden;"></div>
 <a class="wsite-button wsite-button-small wsite-button-highlight" href="everark-is-featured-in-the-funeral-home-and-cemetery-news.html" >
@@ -1425,11 +1357,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 </a>
 <div style="height: 30px; overflow: hidden;"></div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
 
 <div style="text-align:left;"><div style="height: 0px; overflow: hidden;"></div>
 <a class="wsite-button wsite-button-small wsite-button-highlight" href="everark-enters-exclusive-partnership-with-the-funeral-services-collective.html" >
@@ -1437,8 +1365,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 </a>
 <div style="height: 30px; overflow: hidden;"></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1495,8 +1421,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -1505,11 +1429,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font size="5" color="#4bc869">Take a quick tour of EverArk</font></h2>
 
@@ -1522,8 +1442,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:28.991060025543%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='https://everark.app/signup' target='_blank'>
@@ -1532,25 +1450,17 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:71.008939974457%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:22px;"></div>
 
 <h2 class="wsite-content-title"><strong><a href="cemetery-software-request-a-demo.html">REQUEST A DEMO</a></strong></h2>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1560,8 +1470,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -1579,11 +1487,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="paragraph"><font size="4"><a href="cemetery-feature-questions.html">Read our feature Q&amp;A</a></font></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font color="#4bc869" size="5">These are just some of our key features</font></h2>
 
@@ -1602,8 +1506,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:9.9666056428554%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:10px;text-align:left">
 <a href='cemetery-software-graveyard-mapping.html'>
@@ -1612,19 +1514,11 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:48.282713846632%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-software-graveyard-mapping.html"><font size="4">Cemetery Mapping</font></a></strong></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:8.0471189744387%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-software-ecommerce.html'>
@@ -1633,16 +1527,10 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:33.703561536074%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-software-ecommerce.html" title=""><font size="4">eCommerce Site</font></a></strong></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1653,8 +1541,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:9.9489795918367%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:10px;text-align:center">
 <a href='cemetery-software-record-keeping.html'>
@@ -1663,27 +1549,17 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:90.051020408163%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
 	<table class="wsite-multicol-table">
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:52.688205711189%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-software-record-keeping.html"><font size="4">Record Management</font></a></strong></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:10.056082272835%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-software-operations-management.html'>
@@ -1692,23 +1568,15 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:37.255712015976%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-software-operations-management.html"><font size="4">Work Orders</font></a></strong></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1719,8 +1587,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:9.9616858237548%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:10px;text-align:center">
 <a href='cemetery-software-sales-management.html'>
@@ -1729,19 +1595,11 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:48.275862068966%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-software-sales-management.html"><font size="4">Sales &amp; Deals Tracking</font></a></strong></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:8.0459770114943%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-software-order-management.html'>
@@ -1750,16 +1608,10 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:33.716475095785%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-software-order-management.html"><font size="4">Invoicing</font></a></strong></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1778,8 +1630,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.2083879423329%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='digital-legacy-features.html'>
@@ -1788,18 +1638,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.791612057667%; padding:0 5px;">
-					
-						
 
 <div class="paragraph"><strong><a href="digital-legacy-features.html">FOR PLOT OWNERS OR NEXT OF KIN</a></strong></div>
 
 <div class="paragraph"><a href="digital-legacy-features.html">&#8203;<span>Whether you're pre-need planning or at-need, you or your loved one can leave an everlasting digital footprint.</span></a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1810,8 +1654,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.1353497386447%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.io/cemetery-software-features.html#lovedones'>
@@ -1820,25 +1662,17 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.864650261355%; padding:0 5px;">
-					
-						
 
-<div class="paragraph"><strong><a href="https://www.everark.io/cemetery-software-features.html#lovedones">FOR FAMILY &amp; FRIENDS OF THE DECEASED</a></strong></div>
+<div class="paragraph"><strong><a href="cemetery-software-features.html#lovedones">FOR FAMILY &amp; FRIENDS OF THE DECEASED</a></strong></div>
 
-<div class="paragraph"><span><a href="https://www.everark.io/cemetery-software-features.html#lovedones">Coming 2023, download the EverArk celebration of life app and share comments, photos, tributes, and more to commemorate your loved one.</a></span></div>
+<div class="paragraph"><span><a href="cemetery-software-features.html#lovedones">Coming 2023, download the EverArk celebration of life app and share comments, photos, tributes, and more to commemorate your loved one.</a></span></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1848,8 +1682,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -1865,13 +1697,9 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-<div class="paragraph" style="text-align:center;"><a href="https://www.everark.io/cemetery-software-pricing.html#featurefootprint">We have a feature rich cemetery management software.&nbsp; And, if you see something you need that we don't have, we will build it.</a></div>
+<div class="paragraph" style="text-align:center;"><a href="cemetery-software-pricing.html#featurefootprint">We have a feature rich cemetery management software.&nbsp; And, if you see something you need that we don't have, we will build it.</a></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font color="#4bc869" size="5">Try before you buy. Or, start with our Basic Plan</font></h2>
 
@@ -1882,8 +1710,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.1353497386447%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.io/cemetery-software-pricing.html#pricingplans'>
@@ -1892,51 +1718,33 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.864650261355%; padding:0 5px;">
-					
-						
 
-<h2 class="wsite-content-title"><strong><a href="https://www.everark.io/cemetery-software-pricing.html#pricingplans">PRICING PLANS</a></strong></h2>
+<h2 class="wsite-content-title"><strong><a href="cemetery-software-pricing.html#pricingplans">PRICING PLANS</a></strong></h2>
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-pricing.html#pricingplans">Start with our 30-day free trial, then move on to one of our very affordable monthly or annual pricing plans.</a></div>
+<div class="paragraph"><a href="cemetery-software-pricing.html#pricingplans">Start with our 30-day free trial, then move on to one of our very affordable monthly or annual pricing plans.</a></div>
 
 <div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
 	<table class="wsite-multicol-table">
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
-					
-						
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-pricing.html#pricingplansfeatures" target="_blank"><strong><font size="4">BASIC</font></strong><br /><strong><font size="7">$29</font></strong><br /><font size="1">per person / month</font></a></div>
+<div class="paragraph"><a href="cemetery-software-pricing.html#pricingplansfeatures" target="_blank"><strong><font size="4">BASIC</font></strong><br /><strong><font size="7">$29</font></strong><br /><font size="1">per person / month</font></a></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
-					
-						
 
-<div class="paragraph" style="text-align:center;"><font color="#6cb83a"><a href="https://www.everark.io/cemetery-software-pricing.html#pricingplansfeatures" target="_blank"><strong><font size="4">POPULAR</font></strong><br /><strong><font size="7">$59</font></strong><br /><font size="1">per person / month</font></a></font></div>
+<div class="paragraph" style="text-align:center;"><font color="#6cb83a"><a href="cemetery-software-pricing.html#pricingplansfeatures" target="_blank"><strong><font size="4">POPULAR</font></strong><br /><strong><font size="7">$59</font></strong><br /><font size="1">per person / month</font></a></font></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
-					
-						
 
-<div class="paragraph" style="text-align:center;"><a href="https://www.everark.io/cemetery-software-pricing.html#pricingplansfeatures" target="_blank"><font size="4">PRO</font><br /><strong style="color:rgb(98, 98, 98)"><font size="7">$99</font></strong><br /><font size="1" style="color:rgb(98, 98, 98)">per person / month</font></a></div>
+<div class="paragraph" style="text-align:center;"><a href="cemetery-software-pricing.html#pricingplansfeatures" target="_blank"><font size="4">PRO</font><br /><strong style="color:rgb(98, 98, 98)"><font size="7">$99</font></strong><br /><font size="1" style="color:rgb(98, 98, 98)">per person / month</font></a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -1951,8 +1759,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.1353497386447%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.io/cemetery-software-pricing.html#implementationservices'>
@@ -1961,58 +1767,38 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.864650261355%; padding:0 5px;">
-					
-						
 
-<h2 class="wsite-content-title"><strong><a href="https://www.everark.io/cemetery-software-pricing.html#implementationservices" target="_blank">IMPLEMENTATION SERVICES</a></strong></h2>
+<h2 class="wsite-content-title"><strong><a href="cemetery-software-pricing.html#implementationservices" target="_blank">IMPLEMENTATION SERVICES</a></strong></h2>
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-pricing.html#implementationservices" target="_blank">Need help?&nbsp; Check out our fixed fee implementation services to get you up and running faster.</a></div>
+<div class="paragraph"><a href="cemetery-software-pricing.html#implementationservices" target="_blank">Need help?&nbsp; Check out our fixed fee implementation services to get you up and running faster.</a></div>
 
 <div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
 	<table class="wsite-multicol-table">
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
-					
-						
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-pricing.html#implementationservices" target="_blank">IMPORTING PACKAGE<br /><strong><font size="7">$599</font></strong></a></div>
+<div class="paragraph"><a href="cemetery-software-pricing.html#implementationservices" target="_blank">IMPORTING PACKAGE<br /><strong><font size="7">$599</font></strong></a></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
-					
-						
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-pricing.html#implementationservices" target="_blank">MAPPING PACKAGE<br /><strong><font size="7">$1,499</font></strong></a></div>
+<div class="paragraph"><a href="cemetery-software-pricing.html#implementationservices" target="_blank">MAPPING PACKAGE<br /><strong><font size="7">$1,499</font></strong></a></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:33.333333333333%; padding:0 15px;">
-					
-						
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-pricing.html#implementationservices" target="_blank">TRAINING PACKAGE<br /><strong><font size="7">$2,499</font></strong></a></div>
+<div class="paragraph"><a href="cemetery-software-pricing.html#implementationservices" target="_blank">TRAINING PACKAGE<br /><strong><font size="7">$2,499</font></strong></a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2022,8 +1808,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -2039,11 +1823,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font size="5" color="#4bc869">Learn about our partner program</font></h2>
 
@@ -2054,8 +1834,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:6.8152031454784%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-software-partner-community.html'>
@@ -2064,18 +1842,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:93.184796854522%; padding:0 5px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong><a href="cemetery-software-partner-community.html">MEET OUR PARTNERS</a></strong></h2>
 
 <div class="paragraph"><a href="cemetery-software-partner-community.html">Visit our partner community and learn more about our goals to connect with customers and grow our reach.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2090,8 +1862,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:6.6111033428387%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.io/cemetery-software-partners.html#partnerform'>
@@ -2100,18 +1870,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:93.388896657161%; padding:0 5px;">
-					
-						
 
-<h2 class="wsite-content-title"><strong><a href="https://www.everark.io/cemetery-software-partners.html#partnerform" target="_blank">BECOME A PARTNER</a></strong></h2>
+<h2 class="wsite-content-title"><strong><a href="cemetery-software-partners.html#partnerform" target="_blank">BECOME A PARTNER</a></strong></h2>
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-partners.html#partnerform">Join our partner network to grow our businesses.</a></div>
+<div class="paragraph"><a href="cemetery-software-partners.html#partnerform">Join our partner network to grow our businesses.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2126,8 +1890,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:6.4800417438872%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.io/cemetery-software-partners.html#leadform'>
@@ -2136,25 +1898,17 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:93.519958256113%; padding:0 5px;">
-					
-						
 
-<h2 class="wsite-content-title"><strong><a href="https://www.everark.io/cemetery-software-partners.html#leadform" target="_blank">SUBMIT A LEAD</a></strong></h2>
+<h2 class="wsite-content-title"><strong><a href="cemetery-software-partners.html#leadform" target="_blank">SUBMIT A LEAD</a></strong></h2>
 
-<div class="paragraph"><a href="https://www.everark.io/cemetery-software-partners.html#leadform">Register your leads with us to earn commissions.</a></div>
+<div class="paragraph"><a href="cemetery-software-partners.html#leadform">Register your leads with us to earn commissions.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2164,8 +1918,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='blog.html'>
@@ -2174,11 +1926,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font size="5" color="#4bc869">Read our latest blog</font></h2>
 
@@ -2189,8 +1937,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:20px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-technology-mapping-tools.html'>
@@ -2201,23 +1947,15 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="paragraph"><font size="3"><a href="blog.html">Or, check out all of our blogs.</a></font></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2227,8 +1965,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -2246,11 +1982,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="paragraph"><a href="cemetery-software-faq.html">Read our <strong>FAQ</strong> and learn more about cemetery software.</a></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font color="#4bc869" size="5">All our resources are at your fingertips</font></h2>
 
@@ -2261,8 +1993,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:6.8732265407417%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='cemetery-software-quick-facts.html'>
@@ -2271,18 +2001,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:93.126773459258%; padding:0 5px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong><a href="cemetery-software-quick-facts.html">QUICK FACTS</a></strong></h2>
 
 <div class="paragraph"><a href="cemetery-software-quick-facts.html">Get the elevator pitch and discover if EverArk is a good fit for you.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2297,8 +2021,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.1428571428571%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='about-us.html'>
@@ -2307,18 +2029,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.857142857143%; padding:0 5px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong><a href="about-us.html">ABOUT US</a></strong></h2>
 
 <div class="paragraph"><a href="about-us.html">Discover who we are and what we hope to achieve by connecting and working with customers.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2333,8 +2049,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.2664113375962%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='news.html'>
@@ -2343,18 +2057,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.733588662404%; padding:0 5px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong style="color:rgb(98, 98, 98)"><font size="3"><a href="news.html">NEWS &amp; ANNOUNCEMENTS</a></font></strong></h2>
 
-<div class="paragraph"><a href="https://www.everark.io/news">Surf through our latest news and annoucements to see what's new with EverArk and our customers.</a><br /></div>
+<div class="paragraph"><a href="news.html">Surf through our latest news and annoucements to see what's new with EverArk and our customers.</a><br /></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2369,8 +2077,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.0773263433814%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-software-articles.html'>
@@ -2379,18 +2085,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.922673656619%; padding:0 5px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong style="color:rgb(98, 98, 98)"><a href="cemetery-software-articles.html"><font size="3">ARTICLES</font></a></strong></h2>
 
 <div class="paragraph"><a href="cemetery-software-articles.html">Read our articles on cemetery software trends and features.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2405,8 +2105,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:7.4705111402359%; padding:0 5px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='cemetery-software-training.html'>
@@ -2415,25 +2113,17 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:92.529488859764%; padding:0 5px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong style="color:rgb(98, 98, 98)"><a href="cemetery-software-training.html"><font size="3">TRAINING VIDEOS</font></a></strong></h2>
 
 <div class="paragraph"><a href="cemetery-software-training.html" title="">Watch our training videos to get started with EverArk..&nbsp; Learn at your own pace and discover new tips and tricks.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2443,8 +2133,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a>
@@ -2453,11 +2141,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><font color="#4bc869" size="5">Seach for online Digitaphs and Memorials of loved ones</font></strong></div>
 
@@ -2468,8 +2152,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:center">
 <a href='https://everark.me/' target='_blank'>
@@ -2478,23 +2160,15 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:50%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2504,8 +2178,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center">
 <a>
@@ -2514,11 +2186,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><font color="#4bc869" size="5">Shop and buy plots from EverArk customers</font></strong></div>
 
@@ -2529,8 +2197,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:34.099616858238%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://everafterly.everark.app/store' target='_blank'>
@@ -2539,23 +2205,15 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:65.900383141762%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2565,8 +2223,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:26.685393258427%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -2582,11 +2238,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:73.314606741573%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><font color="#4bc869" size="5">Register for EverArk&nbsp;&nbsp;</font></h2>
 
@@ -2597,8 +2249,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:9.9489795918367%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://everark.app/' target='_blank'>
@@ -2607,18 +2257,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:90.051020408163%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong style="color:rgb(98, 98, 98)"><u><a href="https://everark.app/" target="_blank"><font size="3">SIGN UP | LOGIN</font></a>&nbsp;</u>-&nbsp;</strong><em>Cemetery Software</em></h2>
 
 <div class="paragraph"><a href="https://everark.app/" target="_blank">Calling all cemetery owners, managers, sales team, accountants, administrators, ground crew and anyone else looking for a better way to do their job.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2633,8 +2277,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:9.9489795918367%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.me/#/login' target='_blank'>
@@ -2643,18 +2285,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:90.051020408163%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong style="color:rgb(98, 98, 98)"><u><a href="https://www.everark.me/#/login" target="_blank"><font size="3">SIGN UP |&nbsp;LOGIN&#8203;</font></a></u>&nbsp;-&nbsp;</strong><em>Celebration of Life Software</em></h2>
 
 <div class="paragraph"><a href="https://www.everark.me/#/login" target="_blank">Create an online digital legacy for yourself or someone else, leaving an everlasting footprint for your loved ones to cherish.</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2669,8 +2305,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:9.9489795918367%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:0px;margin-left:0px;margin-right:0px;text-align:left">
 <a href='https://www.everark.me/#/login' target='_blank'>
@@ -2679,18 +2313,12 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:90.051020408163%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><strong style="color:rgb(98, 98, 98)"><u><a href="https://apps.apple.com/us/app/everark/id1521710893" target="_blank">DOWNLOAD THE APP</a>&nbsp;</u>-&nbsp;</strong><em style="color:rgb(98, 98, 98)">Our beta version if ready for testing!</em></h2>
 
 <div class="paragraph">Enjoy and share tributes, memories, photos, videos, and much more by creating an account and searching our legacies.</div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2698,8 +2326,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="wsite-spacer" style="height:19px;"></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -2871,16 +2497,10 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:2.7027027027027%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:14.864864864865%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><font size="4">Quick Links</font></strong></div>
 
@@ -2896,7 +2516,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <h2 class="wsite-content-title"><a href="cemetery-software-partners.html">PARTNERS</a></h2>
 
-<h2 class="wsite-content-title"><a href="https://www.everark.io/blog">BLOG</a><br /></h2>
+<h2 class="wsite-content-title"><a href="blog.html">BLOG</a><br /></h2>
 
 <h2 class="wsite-content-title"><a href="cemetery-software-quick-facts.html">QUICK FACTS</a></h2>
 
@@ -2914,19 +2534,13 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <h2 class="wsite-content-title"><a href="https://everafterly.everark.app/store" target="_blank">SHOP PLOTS</a></h2>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:82.432432432432%; padding:0 15px;">
-					
-						
 
 <div><div class="wsite-multicol"><div class="wsite-multicol-table-wrap" style="margin:0 -15px;">
 	<table class="wsite-multicol-table">
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:35.41423487133%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="cemetery-management-software-features.html"><font size="4">Cemetery Software Features</font></a></strong></div>
 
@@ -2960,11 +2574,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="paragraph"><font size="3"><a href="cemetery-software-help-training.html">Help &amp; Training</a></font></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:32.900261408241%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><a href="digital-legacy-features.html"><font size="4">Celebration of Life Features</font></a></strong></div>
 
@@ -2984,11 +2594,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="paragraph"><a href="https://everark.me/" target="_blank"><font size="3">Public Search Engine</font></a></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:31.685503720429%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><strong><font size="3"><a href="https://everark.app/" target="_blank">Login | Sign Up</a></font></strong></div>
 
@@ -3014,12 +2620,10 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <hr class="styled-hr" style="width:100%;"></hr>
 <div style="height: 20px; overflow: hidden; width: 100%;"></div></div>
 
-<div class="paragraph"><font size="3"><a href="https://www.everark.io/cemetery-software-partners.html#partnerform" target="_blank">Become a Partner</a></font></div>
+<div class="paragraph"><font size="3"><a href="cemetery-software-partners.html#partnerform" target="_blank">Become a Partner</a></font></div>
 
-<div class="paragraph"><font size="3"><a href="https://www.everark.io/cemetery-software-partners.html#leadform" target="_blank">Submit a Lead</a></font></div>
+<div class="paragraph"><font size="3"><a href="cemetery-software-partners.html#leadform" target="_blank">Submit a Lead</a></font></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -3027,8 +2631,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 <div class="wsite-spacer" style="height:50px;"></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -3043,8 +2645,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:28.288288288288%; padding:0 25px;">
-					
-						
 
 <div class="wsite-spacer" style="height:10px;"></div>
 
@@ -3053,8 +2653,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:19.124333831901%; padding:0 0px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:10px;text-align:left">
 <a>
@@ -3063,26 +2661,16 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:80.875666168099%; padding:0 0px;">
-					
-						
 
 <div class="paragraph"><a href="">EverArk</a><br />6558 Lonetree Blvd<br />&#8203;Rocklin, CA 95765</div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:21.711711711712%; padding:0 25px;">
-					
-						
 
 <div class="wsite-spacer" style="height:10px;"></div>
 
@@ -3091,8 +2679,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:23.126784104567%; padding:0 0px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -3101,26 +2687,16 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:76.873215895433%; padding:0 0px;">
-					
-						
 
 <div class="paragraph"><a href="tel:8333837275">833-EverArk</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:25%; padding:0 25px;">
-					
-						
 
 <div class="wsite-spacer" style="height:10px;"></div>
 
@@ -3129,8 +2705,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:18.324378228957%; padding:0 0px;">
-					
-						
 
 <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:10px;margin-left:0px;margin-right:0px;text-align:left">
 <a>
@@ -3139,26 +2713,16 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 <div style="display:block;font-size:90%"></div>
 </div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:81.675621771043%; padding:0 0px;">
-					
-						
 
 <div class="paragraph"><a href="mailto:hello@everark.io" title="">hello@everark.io</a></div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
 </div></div></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:25%; padding:0 25px;">
-					
-						
 
 <div style="text-align:left;"><div style="height:0px;overflow:hidden"></div>
 <span class="wsite-social wsite-social-default"><a class='first-child wsite-social-item wsite-social-facebook' href='https://www.facebook.com/EverArkSoftware/' target='_blank' alt='Facebook' aria-label='Facebook'><span class='wsite-social-item-inner'></span></a><a class='wsite-social-item wsite-social-twitter' href='http://twitter.com/everarksoftware' target='_blank' alt='Twitter' aria-label='Twitter'><span class='wsite-social-item-inner'></span></a><a class='wsite-social-item wsite-social-linkedin' href='https://www.linkedin.com/company/everark/' target='_blank' alt='Linkedin' aria-label='Linkedin'><span class='wsite-social-item-inner'></span></a><a class='last-child wsite-social-item wsite-social-youtube' href='https://www.youtube.com/@everarkcemeterysoftware' target='_blank' alt='Youtube' aria-label='Youtube'><span class='wsite-social-item-inner'></span></a></span>
@@ -3175,8 +2739,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 </div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -3191,53 +2753,29 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:46.023767572645%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><font color="#2a2a2a"><font size="1">&copy; 2025 Eternal Legacy Company LLC. All rights reserved.</font><br /><font size="1">EverArk&reg; trademark is owned by Eternal Legacy Company LLC.&nbsp;</font></font></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:12.609251389766%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><a href="cemetery-software-terms-of-service.html"><font size="1">TERMS OF SERVICE</font></a></h2>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:11.354993295204%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><a href="cemetery-software-privacy-policy.html"><font size="1">PRIVACY POLICY</font></a></h2>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:11.086539065295%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><a href="cemetery-software-cookie-policy.html"><font size="1">COOKIE POLICY</font></a></h2>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:10.177252428894%; padding:0 15px;">
-					
-						
 
 <h2 class="wsite-content-title"><a href="cemetery-software-disclaimer.html"><font size="1">DISCLAIMER</font></a></h2>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:8.7481962481962%; padding:0 15px;">
-					
-						
 
-<h2 class="wsite-content-title"><font size="1"><a href="https://www.everark.io/sitemap.xml" target="_blank">SITEMAP</a></font></h2>
+<h2 class="wsite-content-title"><font size="1"><a href="sitemap.xml" target="_blank">SITEMAP</a></font></h2>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -3248,16 +2786,10 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 		<tbody class="wsite-multicol-tbody">
 			<tr class="wsite-multicol-tr">
 				<td class="wsite-multicol-col" style="width:82.432432432432%; padding:0 15px;">
-					
-						
 
 <div class="paragraph"><font size="1"><span style="color:rgb(0, 0, 0)">U.S. PATENT</span><br /><span style="color:rgb(0, 0, 0)">DIGITAL LEGACY AND LOCATION SERVICES FOR BURIAL SITES</span><br /><span style="color:rgb(0, 0, 0)">Covered by:</span><br /><span style="color:rgb(0, 0, 0)">U.S.&nbsp; PRV Application No. 15/865,298</span></font></div>
 
-
-					
 				</td>				<td class="wsite-multicol-col" style="width:17.567567567568%; padding:0 15px;">
-					
-						
 
 <div class="wsite-spacer" style="height:37px;"></div>
 
@@ -3286,8 +2818,6 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
 
 </div>
 
-
-					
 				</td>			</tr>
 		</tbody>
 	</table>
@@ -3306,9 +2836,7 @@ if (document.documentElement.appReady || (window.inEditor && window.inEditor()))
     <script src="files/theme/baambooLicense.js"></script>
     <script src="files/theme/jquery.cookie.js"></script>
     <script src="files/theme/baamboo-jquery.js"></script>
-      <div id="customer-accounts-app"></div>
-    <script src="assets/vendor/cdn11.editmysite.com/js/site/main-customer-accounts-site.js"></script>
-<div id="dialog-region"></div>
+
 		<script>
 function checkForChanges(){
     if ($('#navigation-sticky-wrapper').hasClass('is-sticky')){
@@ -3441,15 +2969,6 @@ $(document).ready(function(){
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLJNKJS6"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-224885944-1">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-224885944-1');
-</script>
 	</body>
 </html>

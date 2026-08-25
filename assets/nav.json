@@ -1,0 +1,74 @@
+[
+  {
+    "id": "807137216236635356",
+    "title": "Tour",
+    "url": "index.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": false
+  },
+  {
+    "id": "845932459489649873",
+    "title": "Features",
+    "url": "cemetery-software-features.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": false
+  },
+  {
+    "id": "991955371594641585",
+    "title": "Pricing",
+    "url": "cemetery-software-pricing.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": false
+  },
+  {
+    "id": "857041114654827260",
+    "title": "Partners",
+    "url": "cemetery-software-partners.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": false
+  },
+  {
+    "id": "268383861935122927",
+    "title": "Blog",
+    "url": "blog.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": false
+  },
+  {
+    "id": "279254457369157478",
+    "title": "Resources",
+    "url": "resources.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": true
+  },
+  {
+    "id": "556297257270355358",
+    "title": "Find a Digitaph",
+    "url": "find-a-digitaph.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": true
+  },
+  {
+    "id": "605163974314908484",
+    "title": "Buy a Plot",
+    "url": "buy-a-plot.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": true
+  },
+  {
+    "id": "855886954509371694",
+    "title": "Login | Sign Up",
+    "url": "login--sign-up.html",
+    "target": "",
+    "nav_menu": false,
+    "nonclickable": true
+  }
+]

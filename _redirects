@@ -1,0 +1,7 @@
+# Host-agnostic redirect rules (Netlify, Cloudflare Pages).
+# netlify.toml takes precedence on Netlify; this file covers hosts that read
+# _redirects instead.
+/apps/search            /search.html   301
+/apps/*                 /404.html      404
+/blog/:slug             /:slug.html    301
+/_archive/*             /404.html      404

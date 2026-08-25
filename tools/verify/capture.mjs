@@ -77,9 +77,14 @@ const context = await browser.newContext({
   // The export is full of http:// subresources; don't let a cert warning stop us.
   ignoreHTTPSErrors: true,
 });
+// BLOCK lets a run answer "is this script visually load-bearing?" without
+// editing a single page: capture once normally, once with it blocked, diff.
+const BLOCK = process.env.BLOCK ? new RegExp(process.env.BLOCK) : null;
+
 await context.route('**/*', (route) => {
   const url = route.request().url();
   if (BLOCKED.some((b) => url.includes(b))) return route.abort();
+  if (BLOCK && BLOCK.test(url)) return route.abort();
   return route.continue();
 });
 

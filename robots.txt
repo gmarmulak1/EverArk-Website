@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_archive/
+Disallow: /search.html
+
+Sitemap: https://www.everark.io/sitemap.xml
