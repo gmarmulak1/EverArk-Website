@@ -5,6 +5,7 @@ instead, then run `npm run build`.
 
 ```
 src/
+  site.json             site-wide values: name, origin, social handle, default image
   pages/<slug>.html     one file per page: front matter, then its content
   partials/             the chrome every page shares
 ```
@@ -20,8 +21,7 @@ still valid HTML and editors highlight it normally:
   "slug": "about-us",
   "title": "About Our Team | Cemetery Software - EVERARK",
   "description": "...",
-  "activeNavId": "853345144352077819",
-  ...
+  "activeNavId": "853345144352077819"
 }
 -->
 <div id="banner">…the page's own content…</div>
@@ -45,10 +45,27 @@ footer, the `<head>` boilerplate and the end-of-body scripts all come from
 | `currentSubnavId` | which submenu item is marked current, when the page is one |
 | `bodyClass` | the body classes, with `{slug}` substituted |
 | `partials` | overrides, e.g. `{"header": "header-no-banner"}` |
+| `social` | overrides for the social card: `title`, `description`, `image`, `type` |
+| `jsonLd` | structured-data blocks for this page, as authored |
+| `extraHead` | anything else this page needs in `<head>`, verbatim |
 
-A page's social tags currently live in a second comment block
-(`<!--everark:social … -->`) directly after the front matter, carried over
-verbatim from the export.
+### Social and structured data
+
+Open Graph, Twitter and structured-data tags are **generated** by
+`tools/build/lib/seo.mjs` — a page does not write its own. In the export, 81 of
+141 pages had no social tags at all, and of the 42 that did, 40 carried an
+`og:url` pointing at a different page. Deriving the tags from the same front
+matter that drives the rest of the `<head>` means a page cannot disagree with
+itself, and a new page gets correct tags without anyone remembering to add
+them.
+
+Set `social.title` only when a page wants a shorter card title than its
+`<title>`; everything else falls back to the page's own description and the
+site image.
+
+`extraHead` exists because one page's social block turned out to contain a
+`<style>` rule hiding its form's required-field label. Anything the extractor
+did not recognise is kept verbatim rather than dropped.
 
 ## Partials
 
@@ -70,5 +87,11 @@ verbatim from the export.
 only defensible if the result is provably unchanged, and a pixel diff would not
 catch a dropped meta tag or a mangled analytics snippet.
 
-`tools/build/extract.mjs` is the script that produced this directory from the
-built pages. It is kept as the record of how the split was derived.
+When a change to the templates is *meant* to alter the output — the SEO tags
+were — the round-trip check fails until the rebuilt pages are committed. Verify
+those with the screenshot harness first.
+
+`tools/build/extract.mjs` is the script that produced `pages/` and `partials/`
+from the built pages, and `tools/migrate/09-extract-social.mjs` lifted the
+social values into front matter. Both are kept as the record of how this
+directory was derived.

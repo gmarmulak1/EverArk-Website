@@ -13,10 +13,6 @@ import { compose } from './lib/compose.mjs';
 const SRC = path.join(ROOT, 'src');
 const DEST = process.env.DEST ? path.resolve(process.env.DEST) : ROOT;
 
-/** Per-page social tags travel in their own comment block, after the front matter. */
-const SOCIAL_OPEN = '<!--everark:social\n';
-const SOCIAL_CLOSE = '\n-->\n';
-
 export function loadPartials() {
   const dir = path.join(SRC, 'partials');
   return Object.fromEntries(
@@ -24,17 +20,14 @@ export function loadPartials() {
   );
 }
 
+export function loadSite() {
+  return JSON.parse(fs.readFileSync(path.join(SRC, 'site.json'), 'utf8'));
+}
+
 export function loadPage(file) {
   const raw = fs.readFileSync(path.join(SRC, 'pages', file), 'utf8');
   const { data, body } = readFrontMatter(raw);
-  let social = '';
-  let content = body;
-  if (body.startsWith(SOCIAL_OPEN)) {
-    const end = body.indexOf(SOCIAL_CLOSE);
-    social = body.slice(SOCIAL_OPEN.length, end);
-    content = body.slice(end + SOCIAL_CLOSE.length);
-  }
-  return { data, social, content };
+  return { data, content: body };
 }
 
 export function pageFiles() {
@@ -43,10 +36,11 @@ export function pageFiles() {
 
 export function buildAll(dest = DEST) {
   const partials = loadPartials();
+  const site = loadSite();
   fs.mkdirSync(dest, { recursive: true });
   const written = [];
   for (const file of pageFiles()) {
-    fs.writeFileSync(path.join(dest, file), compose(loadPage(file), partials));
+    fs.writeFileSync(path.join(dest, file), compose(loadPage(file), partials, site));
     written.push(file);
   }
   return written;

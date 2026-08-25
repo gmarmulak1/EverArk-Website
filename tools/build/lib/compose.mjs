@@ -6,6 +6,7 @@
  * neighbours in ways that are written down.
  */
 import { applyActiveNav } from './page.mjs';
+import { renderSeo } from './seo.mjs';
 
 /** Whitespace between the <html> tag and <head>, identical on every page. */
 const PRE_HEAD = '\n\t';
@@ -27,7 +28,7 @@ export function renderHeadMeta({ title, description, keywords }) {
   return out;
 }
 
-export function compose({ data, social, content }, partials) {
+export function compose({ data, content }, partials, site) {
   const pick = (name) => {
     const chosen = data.partials && data.partials[name];
     return partials[chosen || name];
@@ -46,7 +47,7 @@ export function compose({ data, social, content }, partials) {
     '<head>' +
     renderHeadMeta(data) +
     head +
-    social +
+    renderSeo(data, site) +
     partials['head-tail'] +
     (data.robots || '') +
     data.canonical +

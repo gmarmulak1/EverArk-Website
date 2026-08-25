@@ -68,9 +68,12 @@ if (DRY) {
 }
 
 // ---------------------------------------------------------------- write src
-fs.rmSync(SRC, { recursive: true, force: true });
-fs.mkdirSync(path.join(SRC, 'partials'), { recursive: true });
-fs.mkdirSync(path.join(SRC, 'pages'), { recursive: true });
+// Only the derived directories are cleared: src/site.json and src/README.md
+// are authored, not extracted, and wiping them here once cost a rebuild.
+for (const dir of ['pages', 'partials']) {
+  fs.rmSync(path.join(SRC, dir), { recursive: true, force: true });
+  fs.mkdirSync(path.join(SRC, dir), { recursive: true });
+}
 
 const write = (rel, text) => fs.writeFileSync(path.join(SRC, rel), text);
 
