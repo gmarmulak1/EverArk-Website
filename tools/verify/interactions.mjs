@@ -129,6 +129,148 @@ async function open(path) {
   await page.close();
 }
 
+// -------------------------------------------------------------- carousel
+{
+  // Two instances, and the checks are split between them on purpose.
+  //
+  // The features tour has autoplay off and its bullets on, so it is the one
+  // that can be driven deterministically — a homepage click sequence would be
+  // racing a five-second autoplay timer, and its bullets are hidden by the
+  // theme, so Playwright will not click them.
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message.split('\n')[0]));
+  await page.goto(`${ORIGIN}/cemetery-software-features.html`, { waitUntil: 'load', timeout: 60000 });
+  await page.waitForTimeout(2000);
+
+  const state = () =>
+    page.evaluate(() => {
+      const wrap = document.querySelector('[data-everark-carousel]');
+      const items = [...wrap.querySelector('ul.uk-slideset').children];
+      const nav = wrap.querySelector('ul.uk-slideset-nav');
+      return {
+        items: items.length,
+        total: Number(wrap.dataset.total),
+        shown: items.filter((li) => getComputedStyle(li).display !== 'none').map((li) => li.dataset.item),
+        dots: nav.children.length,
+        activeDot: [...nav.children].findIndex((d) => d.classList.contains('uk-active')),
+        bodyOverflowX: document.body.style.overflowX,
+        minHeight: wrap.style.minHeight,
+      };
+    });
+
+  const click = async (selector) => {
+    await page.click(selector);
+    await page.waitForTimeout(1400);
+    return state();
+  };
+
+  check('carousel page raises no JS errors', errors.length === 0, errors[0] || '');
+
+  const start = await state();
+  check(
+    'the markup carries exactly the slides that are configured',
+    start.items === start.total && start.items === 4,
+    JSON.stringify({ items: start.items, total: start.total }),
+  );
+  check(
+    'one slide shows at a time, with a dot each',
+    start.shown.join(',') === '0' && start.dots === 4 && start.activeDot === 0,
+    JSON.stringify(start),
+  );
+
+  const next = await click('[data-uk-slideset-item="next"]');
+  check('next advances one set', next.shown.join(',') === '1' && next.activeDot === 1, JSON.stringify(next));
+
+  const back = await click('[data-uk-slideset-item="previous"]');
+  check('previous returns to the set before', back.shown.join(',') === '0' && back.activeDot === 0, JSON.stringify(back));
+
+  const wrapped = await click('[data-uk-slideset-item="previous"]');
+  check('previous from the first set wraps to the last', wrapped.shown.join(',') === '3' && wrapped.activeDot === 3, JSON.stringify(wrapped));
+
+  const jumped = await click('ul.uk-slideset-nav > li:nth-child(2)');
+  check('a bullet jumps straight to its set', jumped.shown.join(',') === '1' && jumped.activeDot === 1, JSON.stringify(jumped));
+
+  check(
+    'a finished transition leaves nothing pinned',
+    jumped.bodyOverflowX === '' && jumped.minHeight === '',
+    JSON.stringify({ overflowX: jumped.bodyOverflowX, minHeight: jumped.minHeight }),
+  );
+
+  const runtime = await page.evaluate(() => ({
+    uikit: typeof window.UIkit2,
+    inlineSlideset: [...document.querySelectorAll('script:not([src])')].some((s) => /uk\.slideset|UIkit 2\./.test(s.textContent)),
+  }));
+  check(
+    'no UIkit is loaded or inlined any more',
+    runtime.uikit === 'undefined' && !runtime.inlineSlideset,
+    JSON.stringify(runtime),
+  );
+  await page.close();
+}
+
+{
+  // The homepage strip is the responsive one, and it is hidden above 960px by
+  // the FlexiBox around it — so everything here runs at tablet width. Loading
+  // at a width and resizing to it are different code paths: the set size
+  // follows the breakpoint, so the dot list has to shrink as well as grow.
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(e.message.split('\n')[0]));
+  await page.setViewportSize({ width: 900, height: 900 });
+  await page.goto(`${ORIGIN}/`, { waitUntil: 'load', timeout: 60000 });
+  await page.waitForTimeout(2000);
+
+  const state = () =>
+    page.evaluate(() => {
+      const wrap = document.querySelector('[data-everark-carousel]');
+      const items = [...wrap.querySelector('ul.uk-slideset').children];
+      const nav = wrap.querySelector('ul.uk-slideset-nav');
+      return {
+        items: items.length,
+        total: Number(wrap.dataset.total),
+        shown: items.filter((li) => getComputedStyle(li).display !== 'none').length,
+        dots: nav.children.length,
+        activeDot: [...nav.children].findIndex((d) => d.classList.contains('uk-active')),
+        left: wrap.style.left,
+      };
+    });
+
+  check('home page raises no carousel errors', errors.length === 0, errors[0] || '');
+
+  const tablet = await state();
+  check(
+    'thirteen slides become two per set and seven dots at tablet width',
+    tablet.items === 13 && tablet.total === 13 && tablet.shown === 2 && tablet.dots === 7,
+    JSON.stringify(tablet),
+  );
+
+  // Autoplay is on with a five second interval; watch one turn of it.
+  const before = (await state()).activeDot;
+  await page.waitForTimeout(6500);
+  const later = await state();
+  check('autoplay advances on its own', later.activeDot !== before, `dot ${before} -> ${later.activeDot}`);
+
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.waitForTimeout(1200);
+  const narrow = await state();
+  check(
+    'resizing narrower rebuilds the dots for the new set size',
+    narrow.dots === 13 && narrow.shown === 1,
+    JSON.stringify(narrow),
+  );
+
+  await page.setViewportSize({ width: 900, height: 900 });
+  await page.waitForTimeout(1200);
+  const wide = await state();
+  check(
+    'resizing back restores the wider sets',
+    wide.dots === 7 && wide.shown === 2,
+    JSON.stringify(wide),
+  );
+  await page.close();
+}
+
 // ---------------------------------------------------- no Weebly at runtime
 // Phase 1's bar is that nothing is fetched from Weebly and nothing calls a
 // Weebly service - not that main.js is gone. It still runs, from this repo,

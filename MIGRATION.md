@@ -89,12 +89,14 @@ listens for the event.)
 
 One of those elements is the site's mega-menu, which injects the `<style>` block
 that governs how the dropdown navigation behaves on all 139 pages. Another is a
-UIkit slideset with no base CSS anywhere in the repo — the carousel is built
-entirely in JavaScript, and without it the homepage renders 40 stacked slides.
-Others draw the SVG section dividers and size the full-width hero band, whose
-`setWidth-full` width and offset likewise exist only as computed inline styles.
-Remove `main.js` and all of it silently never runs: measured directly, the flag
-stayed `0` and the hero lost its computed width.
+UIkit slideset: the vendored `uikit.css` supplies the grid widths, but which
+slides are on screen is decided entirely in JavaScript, so without it the
+homepage renders 40 stacked slides.
+(That one has since been replaced; see
+[the carousel](#the-carousel-is-ours-now) below.) Others draw the SVG section dividers and size the full-width hero band,
+whose `setWidth-full` width and offset likewise exist only as computed inline
+styles. Remove `main.js` and all of it silently never runs: measured directly,
+the flag stayed `0` and the hero lost its computed width.
 
 Reimplementing Weebly's `PlatformElement` framework to host them is a component
 overhaul, which Phase 1 rules out. So `main.js` stays — served from this
@@ -278,6 +280,64 @@ them until shown:
 | about-us.html | 58 images, 0.40 MB | 8 images, 0.13 MB |
 | blog.html | 103 images, 0.12 MB | 6 images, 0.03 MB |
 
+### The carousel is ours now
+
+The homepage feature strip and the features-page screenshot tour were the same
+Weebly marketplace element twice over, and it cost 141 KB per page: 39 KB of
+UIkit 2.27.4 — core plus the slideset component — inlined into the markup,
+70 KB of settings blob, and the `PlatformElement` wrapper around them. It also
+shipped **forty** authored slides per instance and deleted the unused ones in
+JavaScript after the browser had already downloaded them, which is why "Add
+Your Title" appeared 81 times in each page and in the site's search index.
+
+[`assets/js/everark-carousel.js`](assets/js/everark-carousel.js) replaces it in
+24 KB (7.6 KB gzipped), with no jQuery, no UIkit and no platform runtime.
+Configuration moved to `data-` attributes on the wrapper, written once by
+`tools/migrate/10-replace-slideset.mjs`; the slide markup, the four vendored
+stylesheets, the arrows and the dot list are untouched, because the
+replacement is written against that markup rather than around it.
+
+| | index.html | cemetery-software-features.html |
+| --- | --- | --- |
+| before | 1,363 KB | 1,044 KB |
+| after | 1,186 KB | 857 KB |
+| dead slides removed | 27 | 36 |
+
+**The behaviour was measured, not read.** `tools/verify/carousel-probe.mjs`
+records what the widget actually does — slides per set, dot count, geometry,
+arrow and dot handling, autoplay cadence, and what a resize does to all of it —
+at six widths on both pages, and diffs two runs field by field. Every visible
+number matches: five slides per set above 1220px, three from 960, two from 768,
+one below, and the dot list rebuilt to match on resize. The six screenshots are
+pixel-identical at 1440/900/390 with no height change.
+
+Four differences survive, all of them defects in the original:
+
+- **It jammed above 960px.** The homepage strip is hidden there by the
+  FlexiBox around it, and `animationend` never fires inside a `display:none`
+  subtree — so the first autoplay tick left `animating` stuck true and the
+  widget ignored every later click. The replacement skips the animation
+  outright when nothing is on screen.
+- **It left `overflow-x: hidden` on `<body>`.** Clamped for the duration of a
+  transition and released at the end — but the transition above never ended,
+  so on desktop the clamp stayed for the rest of the visit.
+- **It misplaced the strip by 10px after a resize.** Loading at 600px put the
+  full-bleed band at x=0; resizing to 600px put it at x=-10. The replacement
+  gives the same answer either way, because it recomputes the offset after
+  re-grouping the slides rather than before.
+- **A resize during a fade blanked it.** Re-grouping bails if a transition is
+  running, and the transition's own timers then hid the slides it had just
+  shown. Transitions are now abandoned cleanly when the sets are rebuilt.
+
+One deliberate quirk was **kept**: the incoming fade is cut short after
+`slides x delay x 2` ms rather than running its configured duration, which on a
+one-slide set means 200 ms instead of 500. That is what the original did, and a
+single slide per set is exactly what every phone sees, so "fixing" it would
+have changed the carousel for most visitors.
+
+This does not retire `main.js`. It removes the largest and most tangled of the
+widget types; the rest of the list is in **Still open** below.
+
 ### CI
 
 `.github/workflows/build.yml` builds on every push and fails if the committed
@@ -286,19 +346,30 @@ root instead of in `src/` and silently reverted by the next deploy.
 
 ## Still open
 
-1. **Replace `main.js`.** Still the one real piece of Weebly left, and still
-   the largest single win available: ~481 KB plus jQuery 1.8.3, which is long
-   out of support. Smaller than it looks once the gate is understood — the
-   widget bootstraps do not wait on the `appReady` *event*; `main.js` is a
-   blocking script in `<head>`, so by the time an element's inline script is
-   parsed `document.documentElement.appReady` is already `1` and it takes the
+1. **Finish replacing `main.js`.** The carousel is done; the rest of the
+   widget types still hold it in place. What is left is 832 element scripts
+   across the 141 pages, 10.1 MB of markup in total:
+
+   | widget | instances | markup |
+   | --- | --- | --- |
+   | section divider (`MyElement`) | 360 | 5.14 MB |
+   | hero band (`MyElement`) | 112 | 1.72 MB |
+   | mega-menu | 141 | 1.52 MB |
+   | FlexiBox card | 196 | 1.45 MB |
+   | shape, button, tabs, FAQ, table | 22 | 0.25 MB |
+
+   Smaller than it looks once the gate is understood — the widget bootstraps
+   do not wait on the `appReady` *event*; `main.js` is a blocking script in
+   `<head>`, so by the time an element's inline script is parsed
+   `document.documentElement.appReady` is already `1` and it takes the
    synchronous branch. Reproducing that needs a `<head>` script setting the
    flag plus a `platformElementRequire` shim supplying jQuery, a small `_`,
-   and a `PlatformElement` base class. Of the widget types in use most extend
-   `PlatformElement` with an empty body; the handful with real behaviour
-   (mega-menu, tabs, accordion, carousel, hero sizing) are small enough to
-   rewrite directly. Gate it on `tools/verify/` — that is what caught the
-   first attempt.
+   and a `PlatformElement` base class. Most instances extend `PlatformElement`
+   with an empty body; the ones with real behaviour are each about the size of
+   the carousel that has just been done. Take them the same way: measure the
+   widget in a browser first, replace it, then diff the measurements — the
+   carousel probe found four defects in the original that reading the source
+   would not have.
 2. **Responsive images.** Lazy loading took the easy win. What remains is
    resizing the 122 files wider than 1600px (29 MB) and emitting `srcset`.
    Doing it safely means measuring each image's rendered width in a browser
